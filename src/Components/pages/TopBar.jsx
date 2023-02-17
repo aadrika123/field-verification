@@ -82,7 +82,6 @@ const TopBar = () => {
     const dropMenuBtn = `block w-full py-2 px-6 clear-both whitespace-nowrap 2xl:text-base hover:text-indigo-600 text-sm`
 
     const mobileMenuBtn = `block py-3 px-4 hover:text-indigo-500 c focus:text-indigo-500`
-    const mobileDropMenuBtn = ``
 
   return (
     <>
