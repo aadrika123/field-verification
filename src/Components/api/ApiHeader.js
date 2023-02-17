@@ -1,0 +1,12 @@
+export default function ApiHeader() {
+  // let token = JSON.parse(window.localStorage.getItem("token"));
+  // let token2 = token.replace(/^"(.*)"$/, "$1");
+  let token2 = window.localStorage.getItem("token");
+  const header = {
+    headers: {
+      Authorization: `Bearer ${token2}`,
+      Accept: "application/json",
+    },
+  };
+  return header;
+}
