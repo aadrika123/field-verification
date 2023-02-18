@@ -9,42 +9,7 @@ export default function ProjectApiList() {
         // 2 API TO GET SAF INBOX LIST
         api_safInboxList: `${baseUrl}/api/property/saf/inbox`,
 
-        // 3 API TO GET SAF BTC LIST
-        api_safBTCList: `${baseUrl}/api/property/saf/btc-inbox`,
-
-        // 4 API TO GET SAF FULL DETAILS
-        api_getSafDetailsById: `${baseUrl}/api/property/saf-details`,
-
-        // 5 API TO GET ROLEBYWORKFLOW
-        api_getWorkflowCandidates: `${baseUrl}/api/workflow/getRoleByWorkflow`,
-
-        // 6 API TO ESCALATE SAF ESCALATION
-        api_postEscalateStatus: `${baseUrl}/api/property/saf/escalate`,
-
-        // 7 API TO SEND INDEPENDENT COMMENT
-        api_postComment: `${baseUrl}/api/property/saf/independent-comment`,
-
-        // 8 API TO POST NEXT LEVEL
-        api_postApplicationToLevel: `${baseUrl}/api/property/saf/post/level`,
-
-        // 9 API TO GET SAF SPECIAL LIST
-        api_getsafSpecialList: `${baseUrl}/api/property/saf/escalate/inbox`,
-
-        // 10 API TO GET ROLES DETAILS
-        api_fetchRoleDetail: `${baseUrl}/api/workflow/getroledetails`,
-
-        // 11 API TO GET SAF OUTBOX LIST
-        api_safOutboxList: `${baseUrl}/api/property/saf/outbox`,
-
-        // 12 API TO APPROVE REJECT SAF
-        api_approveRejectForm: `${baseUrl}/api/property/saf/approvalrejection`,
-
-        // 13 API TO SEND BACK TO CITIZEN SAF APPLICATION
-        api_backToCitizen: `${baseUrl}/api/property/saf/back-to-citizen`,
-
-        // 14 API TO APPLY FOR NEW ASSESSMENT
-        api_getPostSafFormData: `${baseUrl}/api/property/saf/apply`,
-
+        
         // 15 API TO GET SAF FORM MASTER LIST
         api_getSafMasterData: `${baseUrl}/api/property/saf/master-saf`,
 
@@ -52,8 +17,9 @@ export default function ProjectApiList() {
         api_getAppicationFullDetail: `${baseUrl}/api/property/saf-details`,
 
         // 17 API TO POST SAF DOCUMENT UPLOAD IN WORKFLOW
-        api_uploadDocument: `${baseUrl}/api/property/saf/document-upload`,
         post_SiteVerification: `${baseUrl}/api/property/saf/site-verification`,
+
+        post_geoDocUpload : `${baseUrl}/api/property/saf/geotagging`,
 
         // 18 API TO GET LIST OF SAF DOCUMENTS TO UPLOAD
         api_uploadDocumentShow: `${baseUrl}/api/property/saf/get-doc-list`,

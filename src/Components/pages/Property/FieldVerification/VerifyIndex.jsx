@@ -13,6 +13,7 @@ import Preview from './Preview'
 import ExtraDetails from './ExtraDetails'
 import { toast, ToastContainer } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import GeoIndex from '../GeoTagging/GeoIndex'
 
 const VerifyIndex = (props) => {
 
@@ -65,6 +66,7 @@ const VerifyIndex = (props) => {
 
   const nextFun = (val) => {
     setpageNo(val+1)
+    val == 5 && props.page(val)
   }
 
   const backFun = (val) => {
@@ -79,6 +81,8 @@ const VerifyIndex = (props) => {
   const submitFun = () => {
 
     setloader(true)
+
+    // val == 'false' && toast.error('Something went wrong !!!')
 
     let body = {
       safId : props?.applicationData?.id,
@@ -111,16 +115,24 @@ const VerifyIndex = (props) => {
 
     axios.post(post_SiteVerification, body, ApiHeader())
     .then((res) => {
+      if(res?.data?.status == true){
       console.log("success => ", res)
-      toast.success('Submitted Successfully !!!')
-      navigate('/search/property')
+      toast.success('Data Submitted Successfully !!!')
       setloader(false)
+      setpageNo(6)
+    }
+    if(res?.data?.status == false){
+      console.log("error => ", res)
+      toast.error('Something went wrong !!!')
+      setloader(false)
+    }
     })
     .catch((err) => {
       console.log('error', err)
       toast.error('Something went wrong !!!')
       setloader(false)
     })
+
   }
 
   return (
@@ -132,7 +144,7 @@ const VerifyIndex = (props) => {
     
         <div className='w-full'>
 
-            {pageNo != 5 && <div className='text-xs mb-1'>Page No.: {pageNo}/4</div>}
+            {(pageNo != 6 && !loader) && <div className='text-xs mb-1'>Page No.: {pageNo}/5</div>}
 
             {pageNo == 1 && <BasicDetails applicationData={props?.applicationData} wardList={wardList} propertyType={propertyType} roadList={roadList} next={() => nextFun(1)} collectData={collectDataFun} preData={allFormData?.basic} />}
 
@@ -142,7 +154,9 @@ const VerifyIndex = (props) => {
 
             {pageNo == 4 && <Remarks next={() => nextFun(4)} back={() => backFun(4)} collectData={collectDataFun} preData={allFormData?.remarks}  />}
 
-            {pageNo == 5 && <Preview next={() => submitFun()} back={() => backFun(5)} allData={allFormData} applicationData={props?.applicationData} wardList={wardList} propertyList={propertyType} roadList={roadList} usageList={usageType} occupancyList={occupancyType} constructionList={constructionList} floorList={floorList} /> }
+            {(pageNo == 5 && !loader) && <Preview next={() => submitFun()} back={() => backFun(5)} allData={allFormData} applicationData={props?.applicationData} wardList={wardList} propertyList={propertyType} roadList={roadList} usageList={usageType} occupancyList={occupancyType} constructionList={constructionList} floorList={floorList} /> }
+
+            {pageNo == 6 && <GeoIndex applicationData={props?.applicationData} />}
 
 
         </div>
