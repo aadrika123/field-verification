@@ -10,6 +10,7 @@ import CommonLoader from "./Components/pages/Common/CommonLoader";
 import PropertyVerificationForm from "./Components/pages/Property/PropertyVerificationForm";
 import SearchApplications from "./Components/pages/Common/SearchApplications";
 import VerifyForm from "./Components/pages/Property/FieldVerification/VerifyForm";
+import GeoIndex from "./Components/pages/Property/GeoTagging/GeoIndex";
 
 const App = () => {
   const [loader, setloader] = useState(false);
@@ -60,6 +61,9 @@ const App = () => {
               <Route path="/search/:type" element={<SearchApplications />} />
 
               <Route path="/propVerify/:id" element={<VerifyForm />} />
+
+              <Route path="/geoTagging/:id" element={<GeoIndex /> } />
+
             </Routes>
           </>
         )}

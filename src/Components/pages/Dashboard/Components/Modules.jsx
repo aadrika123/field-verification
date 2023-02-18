@@ -8,6 +8,7 @@ import '../assets/Fonts.css'
 import home from '../../../assets/images/home.png'
 import water2 from '../../../assets/images/water2.png'
 import team from '../../../assets/images/team.png'
+import occupancy from '../../../assets/images/occupancy.png'
 import ModuleCard from './ModuleCard'
 
 const Modules = () => {
@@ -20,6 +21,7 @@ const Modules = () => {
             <ModuleCard image={home} label={'Property'} search={'/search/property'} />
             <ModuleCard image={water2} label={'Water'} search={'/search/water'} />
             <ModuleCard image={team} label={'Trade'} search={'/search/trade'} />
+            <ModuleCard image={occupancy} label={'Advertisement'} search={'/search/advertisement'} />
 
         </div>
 

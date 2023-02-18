@@ -12,7 +12,7 @@ import Remarks from './Remarks'
 import Preview from './Preview'
 import ExtraDetails from './ExtraDetails'
 import { toast, ToastContainer } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import GeoIndex from '../GeoTagging/GeoIndex'
 
 const VerifyIndex = (props) => {
@@ -66,7 +66,7 @@ const VerifyIndex = (props) => {
 
   const nextFun = (val) => {
     setpageNo(val+1)
-    val == 5 && props.page(val)
+    // val == 5 && props.page(val)
   }
 
   const backFun = (val) => {
@@ -119,7 +119,8 @@ const VerifyIndex = (props) => {
       console.log("success => ", res)
       toast.success('Data Submitted Successfully !!!')
       setloader(false)
-      setpageNo(6)
+      navigate('/geoTagging/' + props?.applicationData?.id)
+      // props.page(5)
     }
     if(res?.data?.status == false){
       console.log("error => ", res)
@@ -134,6 +135,8 @@ const VerifyIndex = (props) => {
     })
 
   }
+
+  const location = useLocation()
 
   return (
     <>
@@ -156,7 +159,7 @@ const VerifyIndex = (props) => {
 
             {(pageNo == 5 && !loader) && <Preview next={() => submitFun()} back={() => backFun(5)} allData={allFormData} applicationData={props?.applicationData} wardList={wardList} propertyList={propertyType} roadList={roadList} usageList={usageType} occupancyList={occupancyType} constructionList={constructionList} floorList={floorList} /> }
 
-            {pageNo == 6 && <GeoIndex applicationData={props?.applicationData} />}
+            {/* {pageNo == 6 && <GeoIndex applicationData={props?.applicationData} />} */}
 
 
         </div>

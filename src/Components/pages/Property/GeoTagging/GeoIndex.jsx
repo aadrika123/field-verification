@@ -8,13 +8,45 @@ import ApiHeader from '../../../api/ApiHeader'
 import ApiHeader2 from '../../../api/ApiHeader2'
 import axios from 'axios'
 import CommonLoader from '../../Common/CommonLoader'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import * as yup from 'yup'
 import Modal from 'react-modal'
 import {FcCamera} from 'react-icons/fc'
 import {ImCross} from 'react-icons/im'
 
-const GeoIndex = (props) => {
+const GeoIndex = () => {
+
+    // =====fetching application data============
+    const [applicationData, setapplicationData] = useState()
+    const {api_getStaticSafDetails} = ProjectApiList()
+   
+       const {id} = useParams()
+   
+       useEffect(() => {
+   
+           setTimeout(() => {
+               setloader(false)
+           }, 10000);
+   
+           setloader(true)
+   
+           fetchApplicationData()
+   
+       },[])
+   
+       const fetchApplicationData = () => {
+           axios.post(api_getStaticSafDetails, {applicationId : id}, ApiHeader())
+           .then((res) => {
+               console.log("getting application data => ", res)
+               setloader(false)
+               setapplicationData(res?.data?.data)
+           })
+           .catch((err) => {
+               console.log("getting application data error => ", err)
+               setloader(false)
+           })
+       }
+    // ===========fetching application data end=========
 
     const {post_geoDocUpload} = ProjectApiList()
 
@@ -23,12 +55,15 @@ const GeoIndex = (props) => {
     const [frontImageUpload, setfrontImageUpload] = useState()
     const [frontUrl, setfrontUrl] = useState(null)
     const [frontData, setfrontData] = useState()
+    const [frontCamera, setfrontCamera] = useState(false)
     const [rightImageUpload, setrightImageUpload] = useState()
     const [rightUrl, setrightUrl] = useState(null)
     const [rightData, setrightData] = useState()
+    const [rightCamera, setrightCamera] = useState(false)
     const [leftImageUpload, setleftImageUpload] = useState()
     const [leftUrl, setleftUrl] = useState(null)
     const [leftData, setleftData] = useState()
+    const [leftCamera, setleftCamera] = useState(false)
     const [imageNo, setimageNo] = useState(0)
 
     const [loader, setloader] = useState(false)
@@ -56,27 +91,9 @@ const GeoIndex = (props) => {
             console.log('submitting images => ', values)
             submitDocFun(values)
         }
-        // , validationSchema
+        , validationSchema
     })
 
-    // const submitDataFun = () => {
-    
-    // console.log('getting all data => ', props?.body)
-        
-    // axios.post(post_SiteVerification, props?.body, ApiHeader())
-    // .then((res) => {
-    //   console.log("success => ", res)
-    //   toast.success('Submitted Successfully !!!')
-    //   navigate('/search/property')
-    //   setloader(false)
-    // })
-    // .catch((err) => {
-    //   console.log('error', err)
-    //   toast.error('Something went wrong !!!')
-    //   setloader(false)
-    // })
-
-    // }
 
     const submitDocFun = () => {
 
@@ -84,20 +101,23 @@ const GeoIndex = (props) => {
 
         let fd = new FormData();
 
-        fd.append('safId', props?.applicationData?.id)
+        fd.append('safId', id)
 
         fd.append("directionType[2]", 'Front')
-        fd.append('imagePath[2]', frontImageUpload)
+        {!frontCamera ? fd.append('imagePath[2]', frontImageUpload) :
+        fd.append("imagePath[2]", dataURLtoFile(frontUrl, "FrontImage.jpg"))}
         fd.append('longitude[2]', frontData?.longitude)
         fd.append('latitude[2]', frontData?.latitude)
 
         fd.append('directionType[1]', 'Right')
-        fd.append('imagePath[1]', rightImageUpload)
+        {!rightCamera ? fd.append('imagePath[1]', rightImageUpload) :
+        fd.append("imagePath[1]", dataURLtoFile(rightUrl, "RightImage.jpg"))}
         fd.append('longitude[1]', rightData?.longitude)
         fd.append('latitude[1]', rightData?.latitude)
 
         fd.append('directionType[0]', 'Left')
-        fd.append('imagePath[0]', leftImageUpload)
+        {!leftCamera ? fd.append('imagePath[0]', leftImageUpload) :
+        fd.append("imagePath[0]", dataURLtoFile(leftUrl, "LeftImage.jpg"))}
         fd.append('longitude[0]', leftData?.longitude)
         fd.append('latitude[0]', leftData?.latitude)
 
@@ -125,6 +145,18 @@ const GeoIndex = (props) => {
         })
     }
 
+    function dataURLtoFile(dataurl, filename) {
+        const arr = dataurl.split(",");
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, { type: mime });
+      }
+
     // ================to turn on location==================
 
     const [position, setPosition] = useState(null);
@@ -135,27 +167,22 @@ const GeoIndex = (props) => {
         navigator.geolocation.getCurrentPosition(
           (position) => {
             setPosition(position);
+            if(imageNo == 1){
+                setfrontData(position?.coords)
+            }
+            if(imageNo == 3){
+                setleftData(position?.coords)
+            }
+            if(imageNo == 2){
+                setrightData(position?.coords)
+            }
           },
           () => {
-            alert("Please enable location first.");
-            setrepeat(repeat+1)
+            // alert("Please enable location first.");
+            // setrepeat(repeat+1)
           }
         );
       }
-
-    //   <div>
-    //   {position ? (
-    //     <p>
-    //       Your current position is:
-    //       <br />
-    //       Latitude: {position.coords.latitude}
-    //       <br />
-    //       Longitude: {position.coords.longitude}
-    //     </p>
-    //   ) : (
-    //     <p>Loading...</p>
-    //   )}
-    // </div>
 
     // ================to turn on location end==================
 
@@ -164,43 +191,49 @@ const GeoIndex = (props) => {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const [imageData, setImageData] = useState(null);
-    const [display, setdisplay] = useState('hidden')
-  
-    const startCamera = () => {
+
+    useEffect(() => {
         enableLocation()
+    })
+  
+    const startCamera = async (val) => {
       navigator.mediaDevices
         .getUserMedia({ video: true })
         .then((stream) => {
-          videoRef.current.srcObject = stream;
-          setdisplay('visible');
+            videoRef.current.srcObject = stream;
+            videoRef.current.onloadedmetadata = () => {
+              // set the canvas size to match the video stream size
+              canvasRef.current.width = videoRef.current.videoWidth;
+              canvasRef.current.height = videoRef.current.videoHeight;
+            };
         })
         .catch((error) => {
+            if (error.name === 'NotAllowedError') {
+                alert('Permission to access camera was not granted');
+              } else if (error.name === 'NotFoundError' || error.name === 'DevicesNotFoundError') {
+                alert('No camera found');
+              } else if (error.name === 'NotReadableError' || error.name === 'TrackStartError') {
+                alert('Could not start camera');
+              } else {
+                alert('Error accessing camera');
+              }
           console.log("Error accessing camera:", error);
         });
     };
 
-    const endCamera = () => {
-        navigator.mediaDevices
-          .getUserMedia({ video: true })
-          .then((stream) => {
-            videoRef.current.srcObject = stream;
-            setdisplay('visible');
-          })
-          .catch((error) => {
-            console.log("Error accessing camera:", error);
-          });
+    const stopCamera = () => {
+        // if (mediaStream) {
+        //   mediaStream.getTracks().forEach((track) => track.stop());
+        //   mediaStream = null;
+        // }
       };
 
     const captureImage = () => {
         const context = canvasRef.current.getContext("2d");
-        context.drawImage(videoRef.current, 0, 0, 1366, 768);
+        context.drawImage(videoRef.current, 0, 0);
         const data = canvasRef.current.toDataURL("image/jpg");
         setImageData(data);
-        imageNo == 1 && setfrontUrl(data)
-        imageNo == 2 && setrightUrl(data)
-        imageNo == 3 && setleftUrl(data)
-        console.log('image data captured => ', data)
-        closeModal()
+        // console.log('image data captured => ', data)
       };
     //   ====enable camera end ========
 
@@ -237,6 +270,7 @@ const GeoIndex = (props) => {
 
     const handleImage = async (e) => {
         if (e.target.name == "frontImage"){
+            setfrontCamera(false)
             let file = e.target.files[0];
             const geoLocation = await getGeoLocation(file); // for location from image
             console.log("1 Image geo location:", geoLocation); // for location from image
@@ -250,6 +284,7 @@ const GeoIndex = (props) => {
         }
 
         if (e.target.name == "rightImage") {
+            setrightCamera(false)
             let file = e.target.files[0];
             const geoLocation = await getGeoLocation(file);
             console.log("2 Image geo location:", geoLocation);
@@ -263,6 +298,7 @@ const GeoIndex = (props) => {
         }
 
         if (e.target.name == "leftImage") {
+            setleftCamera(false)
             let file = e.target.files[0];
             const geoLocation = await getGeoLocation(file);
             console.log("3 Image geo location:", geoLocation);
@@ -280,7 +316,7 @@ const GeoIndex = (props) => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const openModal = (val) => {
       setIsOpen(true)
-      startCamera()
+      startCamera(val)
       setImageData(null)
       setimageNo(val)
     }
@@ -288,12 +324,46 @@ const GeoIndex = (props) => {
     const afterOpenModal = () => { }
     // ===========Modal End=========
 
+    // =====download image==========
+    const handleDownload = () => {
+        const link = document.createElement("a");
+        link.href = imageData;
+        // link.download = "./Images/CapturedImage.jpg";
+        if(imageNo == 1) {
+            setfrontCamera(true)
+            setfrontUrl(imageData)
+            formik.setFieldValue('frontImage', imageData)
+        }
+        if(imageNo == 2) {
+            setrightCamera(true)
+            setrightUrl(imageData)
+            formik.setFieldValue('rightImage', imageData)
+        }
+        if(imageNo == 3) {
+            setleftCamera(true)
+            setleftUrl(imageData)
+            formik.setFieldValue('leftImage', imageData)
+        }
+        link.click();
+        closeModal()
+      };
+
   return (
     <>
 
     {loader && <CommonLoader /> }
 
     <ToastContainer position="top-right" autoClose={2000} />
+
+    <div className='w-full'>
+            <h1 className=' text-center font-bold text-xl border-b-2 border-gray-700 mx-4'>Field Verification <br />
+            Document Upload </h1>
+        <div className='p-4 flex flex-col gap-y-4'>
+            <div className='w-full items-center justify-center px-4 shadow-sm flex md:flex-row flex-col flex-wrap gap-2 md:justify-evenly bg-indigo-50'>
+                <span className="grid grid-cols-12 w-full text-sm gap-2 my-1"><span className='col-span-6'>Your Application No.:</span> <span className="font-semibold text-base col-span-6">{applicationData?.saf_no}</span></span>
+                <span className="grid grid-cols-12 w-full text-sm  gap-2 my-1"><span className='col-span-6'>Application Type:</span> <span className="font-semibold text-base col-span-6">{applicationData?.assessment_type}</span></span>
+                <span className="grid grid-cols-12 w-full text-sm  gap-2 my-1"><span className='col-span-6'>Apply Date:</span> <span className="font-semibold text-base col-span-6">{applicationData?.application_date}</span></span>
+            </div>
     
     {!loader && <form className='border-2 border-blue-700 bg-blue-50 mb-4' onChange={formik.onChange} onSubmit={formik.handleSubmit} >
                 <h1 className='text-center font-semibold bg-blue-700 text-white uppercase text-lg'>Upload Image</h1>
@@ -302,13 +372,15 @@ const GeoIndex = (props) => {
             <div className='bg-indigo-50 border-2 border-indigo-500 my-2 mx-1'>
                 <div className='text-white bg-indigo-500 px-2 font-semibold'>Front Image</div>
                 <div className='px-2 py-2'>
-                    <div className="grid grid-cols-12 text-sm pb-2 px-4">
+                    <div className="grid grid-cols-12 text-sm pb-2 px-2">
                         <span className=' col-span-12 font-semibold flex justify-center items-center mb-2'>
-                            {frontUrl == null ? <abbr title='Click to capture image' onClick={() => openModal(1)} className='cursor-pointer'><span className='text-[80px]'><FcCamera /></span></abbr> : <img src={frontUrl} alt="Front Image" srcset="" className='w-32' />}
+                        <img src={frontUrl == null ? Photo : frontUrl} alt="Front Image" srcset="" className='w-32' />
                         </span>
                         <span className='col-span-12 grid grid-cols-12 mb-2'>
-                            <span className="col-span-6 text-sm flex items-center">Upload an Image :</span>
-                            <span className="col-span-6 text-sm"><input type="file" onChange={handleImage} name="frontImage" id="" accept='.jpg, .jpeg' className='bg-white px-2 py-1 w-full rounded-sm shadow-sm border-[1px] border-gray-400' /></span>
+                            <span className="col-span-4 text-sm flex items-center">Upload Image :</span>
+                            <span className="col-span-5 text-sm"><input type="file" onChange={handleImage} name="frontImage" id="" accept='.jpg, .jpeg' className='bg-white px-2 py-1 w-full rounded-sm shadow-sm border-[1px] border-gray-400' /></span>
+                            <span className='text-red-500 text-xs col-span-2 flex justify-center items-center'>OR</span>
+                            <span className="col-span-1 text-sm flex items-center justify-end"><abbr title='Click to capture image' onClick={() => openModal(1)} className='cursor-pointer'><span className='text-xl'><FcCamera /></span></abbr> </span>
                         </span>
                         <span className='col-span-12 grid grid-cols-12'>
                             <span className="col-span-6 text-sm flex items-center">Latitude :</span>
@@ -333,11 +405,13 @@ const GeoIndex = (props) => {
                 <div className='px-2 py-2'>
                     <div className="grid grid-cols-12 text-sm pb-2 px-4">
                     <span className=' col-span-12 font-semibold flex justify-center items-center mb-2'>
-                            {rightUrl == null ? <abbr title='Click to capture image' onClick={() => openModal(2)} className='cursor-pointer'><span className='text-[80px]'><FcCamera /></span></abbr> : <img src={rightUrl} alt="Front Image" srcset="" className='w-32' />}
+                    <img src={rightUrl == null ? Photo : rightUrl} alt="Front Image" srcset="" className='w-32' />
                         </span>
                         <span className='col-span-12 grid grid-cols-12 mb-2'>
-                            <span className="col-span-6 text-sm flex items-center">Upload an Image :</span>
-                            <span className="col-span-6 text-sm"><input type="file" onChange={handleImage} name="rightImage" id="" accept='.jpg, .jpeg' className='bg-white px-2 py-1 w-full rounded-sm shadow-sm border-[1px] border-gray-400' /></span>
+                            <span className="col-span-4 text-sm flex items-center">Upload Image :</span>
+                            <span className="col-span-5 text-sm"><input type="file" onChange={handleImage} name="rightImage" id="" accept='.jpg, .jpeg' className='bg-white px-2 py-1 w-full rounded-sm shadow-sm border-[1px] border-gray-400' /></span>
+                            <span className='text-red-500 text-xs col-span-2 flex justify-center items-center'>OR</span>
+                            <span className="col-span-1 text-sm flex items-center justify-end"><abbr title='Click to capture image' onClick={() => openModal(2)} className='cursor-pointer'><span className='text-xl'><FcCamera /></span></abbr> </span>
                         </span>
                         <span className='col-span-12 grid grid-cols-12'>
                             <span className="col-span-6 text-sm flex items-center">Latitude :</span>
@@ -362,11 +436,13 @@ const GeoIndex = (props) => {
                 <div className='px-2 py-2'>
                     <div className="grid grid-cols-12 text-sm pb-2 px-4">
                     <span className=' col-span-12 font-semibold flex justify-center items-center mb-2'>
-                            {leftUrl == null ? <abbr title='Click to capture image' onClick={() => openModal(3)} className='cursor-pointer'><span className='text-[80px]'><FcCamera /></span></abbr> : <img src={leftUrl} alt="Front Image" srcset="" className='w-32' />}
+                           <img src={leftUrl == null ? Photo : leftUrl} alt="Front Image" srcset="" className='w-32' />
                         </span>
                         <span className='col-span-12 grid grid-cols-12 mb-2'>
-                            <span className="col-span-6 text-sm flex items-center">Upload an Image :</span>
-                            <span className="col-span-6 text-sm"><input type="file" onChange={handleImage} name="leftImage" id="" accept='.jpg, .jpeg' className='bg-white px-2 py-1 w-full rounded-sm shadow-sm border-[1px] border-gray-400' /></span>
+                            <span className="col-span-4 text-sm flex items-center">Upload Image :</span>
+                            <span className="col-span-5 text-sm"><input type="file" onChange={handleImage} name="leftImage" id="" accept='.jpg, .jpeg' className='bg-white px-2 py-1 w-full rounded-sm shadow-sm border-[1px] border-gray-400' /></span>
+                            <span className='text-red-500 text-xs col-span-2 flex justify-center items-center'>OR</span>
+                            <span className="col-span-1 text-sm flex items-center justify-end"><abbr title='Click to capture image' onClick={() => openModal(3)} className='cursor-pointer'><span className='text-xl'><FcCamera /></span></abbr> </span>
                         </span>
                         <span className='col-span-12 grid grid-cols-12'>
                             <span className="col-span-6 text-sm flex items-center">Latitude :</span>
@@ -390,10 +466,12 @@ const GeoIndex = (props) => {
                 {/* <div onClick={props?.back} className='px-4 py-1.5 text-sm text-white rounded-sm shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 cursor-pointer'>
                     Back
                 </div> */}
-            <button type='submit' onClick={formik.handleSubmit} className="px-4 py-1.5 mr-4 text-sm text-white rounded-sm shadow-md bg-green-500 hover:bg-green-600 focus:bg-green-600">Submit</button>
+            <button type='submit' className="px-4 py-1.5 mr-4 text-sm text-white rounded-sm shadow-md bg-green-500 hover:bg-green-600 focus:bg-green-600">Submit</button>
             </div>
 
             </form>}
+        </div>
+    </div>
 
             {/* ========Modal==========*/}
             <Modal
@@ -418,9 +496,14 @@ const GeoIndex = (props) => {
                     <div className='w-full text-center my-4'>
                     <button onClick={captureImage} className="text-sm px-4 py-1 bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 text-white rounded-md shadow-md">Capture</button>
                     </div>
-                    {/* {imageData && (
+                    {imageData && <>
                         <img src={imageData} alt="Captured Image" />
-                    )} */}
+                        <div className='w-full text-center my-4'>
+                    <button onClick={handleDownload} className="text-sm px-4 py-1 bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 text-white rounded-md shadow-md">Save</button>
+                    </div>
+                    </>}
+
+                    
 
                     {/* {
                         imageData && 

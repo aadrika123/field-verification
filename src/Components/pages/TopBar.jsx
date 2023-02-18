@@ -78,7 +78,7 @@ const TopBar = () => {
         window.localStorage.removeItem('isLoggedIn')
     }
 
-    const menuBtn = `block py-3 2xl:py-4 px-6 hover:text-white focus:text-white 2xl:text-base cursor-pointer text-sm `
+    const menuBtn = `block py-3 2xl:py-4 px-4 hover:text-white focus:text-white 2xl:text-base cursor-pointer text-sm `
     const dropMenuBtn = `block w-full py-2 px-6 clear-both whitespace-nowrap 2xl:text-base hover:text-indigo-600 text-sm`
 
     const mobileMenuBtn = `block py-3 px-4 hover:text-indigo-500 c focus:text-indigo-500`
@@ -156,6 +156,7 @@ const TopBar = () => {
                         navigate('/dashboard')
                       }}>Home</span>
                     </li>
+
                     <li class="relative cursor-pointer">
                       <span id="mobiledrop-03" class="block py-3 px-4 hover:text-indigo-500 focus:text-indigo-500" onClick={() => dropFun1()}>
                         Property
@@ -164,12 +165,42 @@ const TopBar = () => {
                         </span>
                       </span>
 
-                      {dropDown1 && <ul class="block rounded rounded-t-none top-full z-50 py-0.5 ltr:text-left rtl:text-right mb-4" >
+                      {dropDown1 && <ul class="block rounded rounded-t-none top-full z-50 py-0.5 ltr:text-left rtl:text-right mb-4 bg-indigo-50" >
                         <li class="relative cursor-pointer">
                           <span className={`${dropMenuBtn}`} onClick={() => {
                             setnavToggle(false)
                             navigate('/search/property')
-                          }}>Propert Search</span>
+                          }}>Field Verification</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Water Harvesting <br /> Field Verification</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Missing Geotagging</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Form Distribution</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Pay Property Tax</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Reports</span>
                         </li>
                         <li class="relative cursor-pointer">
                           <span className={`${dropMenuBtn}`} onClick={() => {
@@ -180,17 +211,12 @@ const TopBar = () => {
                         <li class="relative cursor-pointer">
                           <span className={`${dropMenuBtn}`} onClick={() => {
                             setnavToggle(false)
-                            navigate('/PropertyAllTranscationList')
-                          }}>Payment History</span>
-                        </li>
-                        <li class="relative cursor-pointer">
-                          <span className={`${dropMenuBtn}`} onClick={() => {
-                            setnavToggle(false)
-                            navigate('/tax-cal')
-                          }}>Tax Calculator</span>
+                            navigate('/search/property')
+                          }}>Search Assesment</span>
                         </li>
                       </ul>}
                     </li>
+
                     <li class="relative cursor-pointer">
                       <span id="mobiledrop-03" class="block py-3 px-4 hover:text-indigo-500 focus:text-indigo-500" onClick={() => dropFun2()}>
                         Water
@@ -199,7 +225,7 @@ const TopBar = () => {
                         </span>
                       </span>
 
-                      {dropDown2 && <ul class="block rounded rounded-t-none top-full z-50 py-0.5 ltr:text-left rtl:text-right mb-4" >
+                      {dropDown2 && <ul class="block rounded rounded-t-none top-full z-50 py-0.5 ltr:text-left rtl:text-right mb-4 bg-indigo-50" >
                         <li class="relative cursor-pointer">
                           <span className={`${dropMenuBtn}`} onClick={() => {
                             setnavToggle(false)
@@ -209,17 +235,24 @@ const TopBar = () => {
                         <li class="relative cursor-pointer">
                           <span className={`${dropMenuBtn}`}onClick={() => {
                             setnavToggle(false)
-                            navigate('/view-water')
-                          }}>View Connections</span>
+                            navigate('/search/water')
+                          }}>Search Consumer</span>
                         </li>
                         <li class="relative cursor-pointer">
                           <span className={`${dropMenuBtn}`}onClick={() => {
                             setnavToggle(false)
-                            navigate('/track-water')
-                          }}>View Applications</span>
+                            navigate('/search/water')
+                          }}>Water Connection Payment</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/water')
+                          }}>Reports</span>
                         </li>
                       </ul>}
                     </li>
+
                     <li class="relative cursor-pointer">
                       <span id="mobiledrop-03" class="block py-3 px-4 hover:text-indigo-500 focus:text-indigo-500" onClick={() => dropFun3()}>
                         Trade
@@ -228,32 +261,66 @@ const TopBar = () => {
                         </span>
                       </span>
 
-                      {dropDown3 && <ul class="block rounded rounded-t-none top-full z-50 py-0.5 ltr:text-left rtl:text-right mb-4" >
+                      {dropDown3 && <ul class="block rounded rounded-t-none top-full z-50 py-0.5 ltr:text-left rtl:text-right mb-4 bg-indigo-50" >
                         <li class="relative cursor-pointer">
                           <span className={`${dropMenuBtn}`} onClick={() => {
                             setnavToggle(false)
                             navigate('/trade-new-apply')
-                          }}>Apply License</span>
+                          }}>Apply New License</span>
                         </li>
                         <li class="relative cursor-pointer">
                           <span className={`${dropMenuBtn}`}onClick={() => {
                             setnavToggle(false)
-                            navigate('/view-trade')
-                          }}>View Licenses</span>
+                            navigate('/search/trade')
+                          }}>Search Application</span>
                         </li>
                         <li class="relative cursor-pointer">
                           <span className={`${dropMenuBtn}`}onClick={() => {
                             setnavToggle(false)
-                            navigate('/track-trade')
-                          }}>View Applications</span>
+                            navigate('/search/trade')
+                          }}>Search License</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/trade')
+                          }}>Denial</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/trade')
+                          }}>Report</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/trade')
+                          }}>Apply Surrender</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/trade')
+                          }}>Apply Amendment</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/trade')
+                          }}>Apply Renewal</span>
                         </li>
                       </ul>}
                     </li>
+
                     <li class="relative cursor-pointer">
-                      <span  className={`${mobileMenuBtn}`} onClick={() => navigate('/allTranscationList')}>Payment History</span>
+                      <span  className={`${mobileMenuBtn}`} onClick={() => navigate('/advertisement')}>Advertisement</span>
                     </li>
                     <li class="relative cursor-pointer">
-                      <span  className={`${mobileMenuBtn}`} onClick={() => navigate('/editProfile')}>Profile</span>
+                      <span  className={`${mobileMenuBtn}`} onClick={() => navigate('/editProfile')}>Visiting Detail</span>
+                    </li>
+                    <li class="relative cursor-pointer">
+                      <span  className={`${mobileMenuBtn}`} onClick={() => navigate('/changePassword')}>Change Password</span>
                     </li>
                     <li className='relative'>
                       <button className='py-2 px-4 w-full text-sm inline-block text-center rounded leading-5 text-gray-100 bg-red-500 border border-pink-500 hover:text-gray-300 hover:bg-red-600 hover:ring-0 hover:border-red-600 focus:bg-red-600 focus:border-pink-600 focus:outline-none focus:ring-0 cursor-pointer' onClick={() => {
@@ -278,7 +345,7 @@ const TopBar = () => {
             <div onMouseLeave={() => menuFalseFun()} class="hidden lg:flex lg:flex-row lg:flex-nowrap lg:items-center lg:justify-between lg:mt-0" id="desktp-menu">
 
 {/* ===logo======== */}
-            <span class="hidden lg:flex items-center py-2 mr-4 text-xl" onClick={() => {
+            <span class="hidden lg:flex items-center py-2 mr-2 text-xl" onClick={() => {
               setnavToggle(false)
               navigate('/dashboard')
             }}>
@@ -300,6 +367,7 @@ const TopBar = () => {
                 Home
               </span>
             </li>
+
           <li class="relative cursor-pointer">
               <span id="dropdown-01" class={`${menuBtn}`} onMouseEnter={dropFun1}>
                 Property
@@ -311,20 +379,56 @@ const TopBar = () => {
               {/* <!-- dropdown menu --> */}
               {dropDown1 && <ul class="block absolute left-1/2 right-auto border-t-2 transform -translate-x-1/2 rounded top-full z-50 py-0.5 ltr:text-left rtl:text-right bg-white text-gray-700 shadow-md cursor-pointer">
                 <li class="relative cursor-pointer">
-                  <span className={`${dropMenuBtn}`} 
-                   onClick={() => navigate('/propertyDashboard')}>Property Dashboard</span>
-                </li>
-                <li class="relative cursor-pointer">
-                  <span className={`${dropMenuBtn}`} onClick={() => navigate('/safform/new/0')}>Apply Holding</span>
-                </li>
-                <li class="relative cursor-pointer">
-                  <span className={`${dropMenuBtn}`} onClick={() => navigate('/PropertyAllTranscationList')}>Payment History</span>
-                </li>
-                <li class="relative cursor-pointer">
-                  <span className={`${dropMenuBtn}`} onClick={() => navigate('/tax-cal')}>Tax Calculator</span>
-                </li>
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Field Verification</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Water Harvesting <br /> Field Verification</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Missing Geotagging</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Form Distribution</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Pay Property Tax</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Reports</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/safform/new/0')
+                          }}>Holding Apply</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Search Assesment</span>
+                        </li>
               </ul>}
             </li>
+
             <li class="relative cursor-pointer">
               <span id="dropdown-01" class={`${menuBtn}`} onMouseEnter={dropFun2}>
                 Water
@@ -335,17 +439,33 @@ const TopBar = () => {
               </span>
               {/* <!-- dropdown menu --> */}
               {dropDown2 && <ul class="block absolute left-1/2 right-auto border-t-2 transform -translate-x-1/2 rounded top-full z-50 py-0.5 ltr:text-left rtl:text-right bg-white text-gray-700 shadow-md cursor-pointer">
-                <li class="relative cursor-pointer">
-                  <span className={`${dropMenuBtn}`} onClick={() => navigate('/water-apply')}>Apply Connection</span>
-                </li>
-                <li class="relative cursor-pointer">
-                  <span className={`${dropMenuBtn}`} onClick={() => navigate('/view-water')}>View Connections</span>
-                </li>
-                <li class="relative cursor-pointer">
-                  <span className={`${dropMenuBtn}`} onClick={() => navigate('/track-water')}>View Applications</span>
-                </li>
+                 <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/water-apply')
+                          }}>Apply Connection</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/water')
+                          }}>Search Consumer</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/water')
+                          }}>Water Connection Payment</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/water')
+                          }}>Reports</span>
+                        </li>
               </ul>}
             </li>
+
             <li class="relative cursor-pointer">
               <span id="dropdown-01" class={`${menuBtn}`} onMouseEnter={dropFun3}>
                 Trade
@@ -356,30 +476,69 @@ const TopBar = () => {
               </span>
               {/* <!-- dropdown menu --> */}
               {dropDown3 && <ul class="block absolute left-1/2 right-auto border-t-2 transform -translate-x-1/2 rounded top-full z-50 py-0.5 ltr:text-left rtl:text-right bg-white text-gray-700 shadow-md cursor-pointer">
-                <li class="relative cursor-pointer">
-                  <span className={`${dropMenuBtn}`} onClick={() => navigate('/trade-new-apply')}>Apply License</span>
-                </li>
-                <li class="relative cursor-pointer">
-                  <span className={`${dropMenuBtn}`} onClick={() => navigate('/view-trade')}>View License</span>
-                </li>
-                <li class="relative cursor-pointer">
-                  <span className={`${dropMenuBtn}`} onClick={() => navigate('/track-trade')}>View Applications</span>
-                </li>
+              <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/trade-new-apply')
+                          }}>Apply New License</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/trade')
+                          }}>Search Application</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/trade')
+                          }}>Search License</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/trade')
+                          }}>Denial</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/trade')
+                          }}>Report</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/trade')
+                          }}>Apply Surrender</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/trade')
+                          }}>Apply Amendment</span>
+                        </li>
+                        <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`}onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/trade')
+                          }}>Apply Renewal</span>
+                        </li>
               </ul>}
             </li>
+
             <li class="relative cursor-pointer">
-            <span id="dropdown-01" class={`${menuBtn}`} onClick={() => navigate('/allTranscationList')}>
-                Payment History
-              </span>
-            </li>
-            <li class="relative cursor-pointer">
-            <span id="dropdown-01" class={`${menuBtn}`} onClick={() => navigate('/editProfile')}>
-                Profile
-              </span>
-            </li>
+                      <span  className={`${menuBtn}`} onClick={() => navigate('/advertisement')}>Advertisement</span>
+                    </li>
+                    <li class="relative cursor-pointer">
+                      <span  className={`${menuBtn}`} onClick={() => navigate('/editProfile')}>Visiting Detail</span>
+                    </li>
+                    <li class="relative cursor-pointer">
+                      <span  className={`${menuBtn}`} onClick={() => navigate('/changePassword')}>Change Password</span>
+                    </li>
           </ul>
 
-          <div class="grid text-center lg:block my-4 lg:my-auto">
+          <div class="grid text-center lg:block my-2 lg:my-auto">
             <span class="py-2 px-4 text-sm inline-block text-center rounded leading-5 text-gray-100 bg-red-500 border border-pink-500 hover:text-gray-300 hover:bg-red-600 hover:ring-0 hover:border-red-600 focus:bg-red-600 focus:border-pink-600 focus:outline-none focus:ring-0 cursor-pointer" onClick={openModal}>
               Log Out
             </span>

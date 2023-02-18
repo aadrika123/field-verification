@@ -14,16 +14,16 @@ const ModuleCard = (props) => {
 
   // ========TRACK BUTTON ACTION==============
   const actionFun = () => {
-    props?.label == 'Property' && navigate('/propertyDashboard')
-    props?.label == 'Water' && navigate('/track-water')
-    props?.label == 'Trade' && navigate('/track-trade')
+    props?.label == 'Property' && navigate('/safform/new/0')
+    props?.label == 'Water' && navigate('/water-apply')
+    props?.label == 'Trade' && navigate('/trade-apply')
   }
 
   // ===========CARD CLICK ACTION===============
   const cardAction = () => {
-    props?.label == 'Property' && navigate('/propertyDashboard')
-    props?.label == 'Water' && navigate('/view-water')
-    props?.label == 'Trade' && navigate('/view-trade')
+    props?.label == 'Property' && navigate('/search/property')
+    props?.label == 'Water' && navigate('/search/water')
+    props?.label == 'Trade' && navigate('/search/trade')
   }
 
 
@@ -55,8 +55,8 @@ const ModuleCard = (props) => {
                       {/* ==========APPLY BUTTON=========== */}
                         <button className={buttonStyle} 
                         onClick={() => navigate(`${props?.search}`)}
-                        id={`${props?.label}1`} data-tooltip-content={`Click to search ${props?.label}`}
-                        >Search</button>
+                        id={`${props?.label}1`} data-tooltip-content={`Click to search and verify ${props?.label}`}
+                        >Field Verification</button>
 
                         {/* ============TRACK BUTTON=========== */}
                         <button className={buttonStyle} onClick={() => actionFun()} id={`${props?.label}2`} data-tooltip-content={`Click to apply ${props?.label}`}>Apply</button>
