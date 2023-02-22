@@ -6,8 +6,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../../assets/Fonts.css'
-import water2 from '../../../../../Components/Media/water2.png'
-import drop from '../../../../../Components/Media/drop.png'
+import water2 from '../../../../../assets/images/water2.png'
+import drop from '../../../../../assets/images/drop.png'
 import EmptyList from '../EmptyList'
 
 const WaterList = (props) => {

@@ -11,6 +11,7 @@ import PropertyVerificationForm from "./Components/pages/Property/PropertyVerifi
 import SearchApplications from "./Components/pages/Common/SearchApplications";
 import VerifyForm from "./Components/pages/Property/FieldVerification/VerifyForm";
 import GeoIndex from "./Components/pages/Property/GeoTagging/GeoIndex";
+// import CitizenPropSafApplicationFormIndex from "./Components/pages/Property/CitizenSafForm/CitizenPropSafApplicationFormIndex";
 
 const App = () => {
   const [loader, setloader] = useState(false);
@@ -42,12 +43,9 @@ const App = () => {
       <ToastContainer position="top-right" autoClose={2000} />
 
       <contextVar.Provider value={contextData}>
-        {/* {
-          (window.localStorage.getItem('isLoggedIn') == false || window.localStorage.getItem('isLoggedIn') == null) && <> */}
         <Routes>
           <Route path="/" element={<Login />} />
         </Routes>
-        {/* </> } */}
 
         {location.pathname != "/" && (
           <>
@@ -63,6 +61,8 @@ const App = () => {
               <Route path="/propVerify/:id" element={<VerifyForm />} />
 
               <Route path="/geoTagging/:id" element={<GeoIndex /> } />
+
+              {/* <Route path="/safform" element={<CitizenPropSafApplicationFormIndex /> } /> */}
 
             </Routes>
           </>
