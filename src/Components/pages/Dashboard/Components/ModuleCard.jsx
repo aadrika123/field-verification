@@ -17,6 +17,7 @@ const ModuleCard = (props) => {
     props?.label == 'Property' && navigate('/safform/new/0')
     props?.label == 'Water' && navigate('/water-apply')
     props?.label == 'Trade' && navigate('/trade-apply')
+    props?.label == 'Advertisement' && navigate('/self-apply')
   }
 
   // ===========CARD CLICK ACTION===============
@@ -24,6 +25,7 @@ const ModuleCard = (props) => {
     props?.label == 'Property' && navigate('/search/property')
     props?.label == 'Water' && navigate('/search/water')
     props?.label == 'Trade' && navigate('/search/trade')
+    props?.label == 'Advertisement' && navigate('/search/advertisement')
   }
 
 
@@ -55,18 +57,20 @@ const ModuleCard = (props) => {
                       {/* ==========APPLY BUTTON=========== */}
                         <button className={buttonStyle} 
                         onClick={() => navigate(`${props?.search}`)}
-                        id={`${props?.label}1`} data-tooltip-content={`Click to search and verify ${props?.label}`}
+                        // id={`${props?.label}1`} data-tooltip-content={`Click to search and verify ${props?.label}`}
                         >Field Verification</button>
 
                         {/* ============TRACK BUTTON=========== */}
-                        <button className={buttonStyle} onClick={() => actionFun()} id={`${props?.label}2`} data-tooltip-content={`Click to apply ${props?.label}`}>Apply</button>
+                        <button className={buttonStyle} onClick={() => actionFun()}
+                        //  id={`${props?.label}2`} data-tooltip-content={`Click to apply ${props?.label}`}
+                         >Apply</button>
                     </div>
                 </div>
             </div>
 
             {/* ===========TOOLTIP============== */}
-            <ReactTooltip anchorId={`${props?.label}1`} place="bottom" type="info" effect="float" className='poppins text-xs bg-indigo-600 text-white' />
-            <ReactTooltip anchorId={`${props?.label}2`} place="bottom" type="info" effect="float" className='poppins text-xs bg-indigo-600 text-white' />
+            {/* <ReactTooltip anchorId={`${props?.label}1`} place="bottom" type="info" effect="float" className='poppins text-xs bg-indigo-600 text-white' />
+            <ReactTooltip anchorId={`${props?.label}2`} place="bottom" type="info" effect="float" className='poppins text-xs bg-indigo-600 text-white' /> */}
     
     </>
   )

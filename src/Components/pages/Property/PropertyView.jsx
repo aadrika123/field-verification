@@ -11,7 +11,7 @@ const PropertyView = (props) => {
 
   return (
     <>
-        <div className='w-full bg-indigo-50 shadow-md  rounded-sm pb-2 border-2 border-indigo-600 mb-4 select-none cursor-pointer' onClick={() => navigate(`/propVerify/${props?.dataList?.id}`)}>
+        <div className='w-full relative bg-indigo-50 shadow-md  rounded-sm pb-2 border-2 border-indigo-600 mb-4 select-none cursor-pointer' onClick={() => navigate(`/propVerify/${props?.dataList?.id}`)}>
             <div className='font-semibold bg-indigo-600 px-4 text-white'>Property Details</div>
                                             <div className='w-full rounded-lg p-4 space-b-2'>
                                                 <div className='flex flex-row flex-wrap gap-x-4 gap-y-2 w-full'>

@@ -52,10 +52,8 @@ const App = () => {
             <TopBar />
             <NewDashboardRoutes />
             <Routes>
-              <Route
-                path="/propertyVerification/:id"
-                element={<PropertyVerificationForm />}
-              />
+              <Route path="/propertyVerification/:id" element={<PropertyVerificationForm />} />
+              
               <Route path="/search/:type" element={<SearchApplications />} />
 
               <Route path="/propVerify/:id" element={<VerifyForm />} />
