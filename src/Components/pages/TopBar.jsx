@@ -176,12 +176,6 @@ const TopBar = () => {
                           <span className={`${dropMenuBtn}`} onClick={() => {
                             setnavToggle(false)
                             navigate('/search/property')
-                          }}>Water Harvesting <br /> Field Verification</span>
-                        </li>
-                        <li class="relative cursor-pointer">
-                          <span className={`${dropMenuBtn}`} onClick={() => {
-                            setnavToggle(false)
-                            navigate('/search/property')
                           }}>Missing Geotagging</span>
                         </li>
                         <li class="relative cursor-pointer">
@@ -226,6 +220,12 @@ const TopBar = () => {
                       </span>
 
                       {dropDown2 && <ul class="block rounded rounded-t-none top-full z-50 py-0.5 ltr:text-left rtl:text-right mb-4 bg-indigo-50" >
+                      <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Water Harvesting <br /> Field Verification</span>
+                        </li>
                         <li class="relative cursor-pointer">
                           <span className={`${dropMenuBtn}`} onClick={() => {
                             setnavToggle(false)
@@ -388,12 +388,6 @@ const TopBar = () => {
                           <span className={`${dropMenuBtn}`} onClick={() => {
                             setnavToggle(false)
                             navigate('/search/property')
-                          }}>Water Harvesting <br /> Field Verification</span>
-                        </li>
-                        <li class="relative cursor-pointer">
-                          <span className={`${dropMenuBtn}`} onClick={() => {
-                            setnavToggle(false)
-                            navigate('/search/property')
                           }}>Missing Geotagging</span>
                         </li>
                         <li class="relative cursor-pointer">
@@ -439,6 +433,12 @@ const TopBar = () => {
               </span>
               {/* <!-- dropdown menu --> */}
               {dropDown2 && <ul class="block absolute left-1/2 right-auto border-t-2 transform -translate-x-1/2 rounded top-full z-50 py-0.5 ltr:text-left rtl:text-right bg-white text-gray-700 shadow-md cursor-pointer">
+              <li class="relative cursor-pointer">
+                          <span className={`${dropMenuBtn}`} onClick={() => {
+                            setnavToggle(false)
+                            navigate('/search/property')
+                          }}>Water Harvesting <br /> Field Verification</span>
+                        </li>
                  <li class="relative cursor-pointer">
                           <span className={`${dropMenuBtn}`} onClick={() => {
                             setnavToggle(false)
