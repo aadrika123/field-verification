@@ -64,16 +64,16 @@ function CitizenPropAdditionalDetails(props) {
 
     const initialValues = {
         zone: '',
-        mobileTowerStatus: '0',
-        hoardingStatus: '0',
-        petrolPumpStatus: '0',
-        waterHarvestingStatus: '0',
-        mobileTowerArea: '',
-        hoardingArea: '',
-        petrolPumpArea: '',
-        mobileTowerDate: '',
-        hoardingDate: '',
-        petrolPumpDate: ''
+        mobileTowerStatus:props?.prevData?.mobileTowerStatus,
+        hoardingStatus:props?.prevData?.hoardingStatus,
+        petrolPumpStatus:props?.prevData?.petrolPumpStatus,
+        waterHarvestingStatus:props?.prevData?.waterHarvestingStatus,
+        mobileTowerArea: props?.prevData?.mobileTowerArea,
+        hoardingArea: props?.prevData?.hoardingArea,
+        petrolPumpArea: props?.prevData?.petrolPumpArea,
+        mobileTowerDate: props?.prevData?.mobileTowerDate,
+        hoardingDate: props?.prevData?.hoardingDate,
+        petrolPumpDate: props?.prevData?.petrolPumpDate
     };
 
     const formik = useFormik({

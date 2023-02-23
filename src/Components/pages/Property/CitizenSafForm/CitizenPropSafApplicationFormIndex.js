@@ -724,8 +724,6 @@ function CitizenPropSafApplicationFormIndex() {
             });
     };
 
-
-
     return (
         <>
             <ToastContainer autoClose={2000} position="top-right" />
@@ -740,14 +738,14 @@ function CitizenPropSafApplicationFormIndex() {
 
                 <div className="w-full">
 
-                {(formIndex != 7) && <div className='text-xs mb-1 mx-4'>Page No.: {formIndex}/6</div>}
+                {(formIndex < 7) && <div className='text-xs mb-1 mx-4'>Page No.: {formIndex}/6</div>}
                                 {formIndex < 8 && <>
-                                    {animateform1 && <CitizenPropBasicDetail3 setzoneList={setzoneList} getLocationByUlb={getLocationByUlb} safType={safType} existingPropertyDetails={existingPropertyDetails} ulbList={ulbList} preFormData={preFormData} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
-                                    {animateform2 && <CitizenPropPropertyAddressDetails ulbLocation={ulbLocation} safType={safType} existingPropertyDetails={existingPropertyDetails} preFormData={preFormData} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
-                                    {animateform3 && <CitizenPropElectricityWaterDetails safType={safType} existingPropertyDetails={existingPropertyDetails} preFormData={preFormData} collectFormDataFun={collectAllFormData} backFun={backFun} nextFun={nextFun} formIndex />}
-                                    {animateform4 && <CitizenPropOwnerDetails safType={safType} existingPropertyDetails={existingPropertyDetails} preFormData={preFormData} assType={assTypeText} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
-                                    {animateform5 && <CitizenPropFloorDetails safType={safType} existingPropertyDetails={existingPropertyDetails} preFormData={preFormData} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
-                                    {animateform6 && <CitizenPropAdditionalDetails submitRuelsetData={submitRuelsetData} zoneValue={zoneValue} setzoneValue={setzoneValue} zoneList={zoneList} getLocationByUlb={getLocationByUlb} safType={safType} existingPropertyDetails={existingPropertyDetails} ulbList={ulbList} preFormData={preFormData} collectFormDataFun={collectAllFormData} allFormData={allFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
+                                    {animateform1 && <CitizenPropBasicDetail3 setzoneList={setzoneList} getLocationByUlb={getLocationByUlb} safType={safType} existingPropertyDetails={existingPropertyDetails} prevData={allFormData?.basicDetails} ulbList={ulbList} preFormData={preFormData} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
+                                    {animateform2 && <CitizenPropPropertyAddressDetails ulbLocation={ulbLocation} safType={safType} existingPropertyDetails={existingPropertyDetails} prevData={allFormData?.propertyAddressDetails} preFormData={preFormData} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
+                                    {animateform3 && <CitizenPropElectricityWaterDetails safType={safType} existingPropertyDetails={existingPropertyDetails} prevData={allFormData?.electricityWaterDetails} preFormData={preFormData} collectFormDataFun={collectAllFormData} backFun={backFun} nextFun={nextFun} formIndex />}
+                                    {animateform4 && <CitizenPropOwnerDetails safType={safType} existingPropertyDetails={existingPropertyDetails} prevData={allFormData?.ownerDetails} preFormData={preFormData} assType={assTypeText} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
+                                    {animateform5 && <CitizenPropFloorDetails safType={safType} existingPropertyDetails={existingPropertyDetails} prevData={allFormData?.floorDetails} preFormData={preFormData} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
+                                    {animateform6 && <CitizenPropAdditionalDetails submitRuelsetData={submitRuelsetData} zoneValue={zoneValue} setzoneValue={setzoneValue} zoneList={zoneList} getLocationByUlb={getLocationByUlb} safType={safType} existingPropertyDetails={existingPropertyDetails} prevData={allFormData?.additionalDetails} ulbList={ulbList} preFormData={preFormData} collectFormDataFun={collectAllFormData} allFormData={allFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
                                     {(formIndex == 7 && animateform7) && <SafFormReview safType={safType} zoneValue={zoneValue} rulesetData={rulesetData} formReviewData={allFormPreviewData} collectFormDataFun={collectAllFormData} submitFun={submitButtonToggle} toastFun={notify} backFun={backFun} nextFun={nextFun} />}
                                 </>}
                 </div>

@@ -59,24 +59,26 @@ function CitizenPropPropertyAddressDetails(props) {
     })
     const formik = useFormik({
         initialValues: {
-            addressCheckbox: '',
-            khataNo: '',
-            plotNo: '',
-            village_mauja: '',
-            plotArea: '',
-            roadWidth: '',
-            city: 'Ranchi', //static later fetch with ulbId onchange
-            district: 'Ranchi', //static later fetch with ulbId onchange
-            state: 'Jharkhand', //static later fetch with ulbId onchange
-            pin: '',
-            locality: '',
-            c_city: '',
-            c_district: '',
-            c_state: '',
-            c_pin: '',
-            c_locality: '',
+            khataNo:props?.prevData?.khataNo,
+            plotNo:props?.prevData?.plotNo,
+            village_mauja:props?.prevData?.village_mauja,
+            plotArea:props?.prevData?.plotArea,
+            roadWidth:props?.prevData?.roadWidth,
+            city:props?.prevData?.city, //static later fetch with ulbId onchange
+            district:props?.prevData?.district, //static later fetch with ulbId onchange
+            state:props?.prevData?.state, //static later fetch with ulbId onchange
+            pin:props?.prevData?.pin,
+            locality:props?.prevData?.locality,
+            addressCheckbox:props?.prevData?.addressCheckbox,
+            c_city:props?.prevData?.c_city,
+            c_district:props?.prevData?.c_district,
+            c_state:props?.prevData?.c_state,
+            c_pin:props?.prevData?.c_pin,
+            c_locality:props?.prevData?.c_locality,
             // addressCheckbox: false
         },
+
+        enableReinitialize: true,
 
         onSubmit: (values, resetForm) => {
             console.log('propertyaddressdetails ', values)
@@ -179,7 +181,7 @@ function CitizenPropPropertyAddressDetails(props) {
                         <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                 <label className='col-span-12 font-semibold mb-2'>Khata No.<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('khataNo')} type="text" className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
+                                <input  {...formik.getFieldProps('khataNo')} value={formik.values.khataNo} type="text" className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter Khata No." />
                                 <span className="text-red-600 text-xs">{formik.touched.khataNo && formik.errors.khataNo ? formik.errors.khataNo : null}</span>
                                 </span>
@@ -188,7 +190,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                 <label className='col-span-12 font-semibold mb-2'>Plot No<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('plotNo')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                <input  {...formik.getFieldProps('plotNo')} value={formik.values.plotNo} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter Plot No." />
                                 <span className="text-red-600 text-xs">{formik.touched.plotNo && formik.errors.plotNo ? formik.errors.plotNo : null}</span>
                                 </span>
@@ -197,7 +199,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                 <label className='col-span-12 font-semibold mb-2'>Village/Mauja Name<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('village_mauja')} type="text" className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
+                                <input  {...formik.getFieldProps('village_mauja')} value={formik.values.village_mauja} type="text" className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter Village/Mauja Name" />
                                 <span className="text-red-600 text-xs">{formik.touched.village_mauja && formik.errors.village_mauja ? formik.errors.village_mauja : null}</span>
                                 </span>
@@ -206,7 +208,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                 <label className='col-span-12 font-semibold mb-2'>Area of Plot (in Decimal)</label>
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('plotArea')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                <input  {...formik.getFieldProps('plotArea')} value={formik.values.plotArea} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="EnterArea of Plot." />
                                 <span className="text-red-600 text-xs">{formik.touched.plotArea && formik.errors.plotArea ? formik.errors.plotArea : null}</span>
                                 </span>
@@ -215,7 +217,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                 <label className='col-span-12 font-semibold mb-2'>Road Width (in ft)<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small> </label>
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('roadWidth')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                <input  {...formik.getFieldProps('roadWidth')} value={formik.values.roadWidth} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter Road Width" />
                                 {/* <label className='hidden'><small className="block mt-1 text-xs text-gray-600 inline text-red-400 leading-tight">In Case of No Road Enter "0" (For Vacant Land Only)</small></label> */}
                                 <span className="text-red-600 text-xs">{formik.touched.roadWidth && formik.errors.roadWidth ? formik.errors.roadWidth : null}</span>
@@ -234,7 +236,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className='col-span-12 font-semibold mb-2'>City<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('city')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                <input  {...formik.getFieldProps('city')} value={formik.values.city} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter City" />
                                 <span className="text-red-600 text-xs">{formik.touched.city && formik.errors.city ? formik.errors.city : null}</span>
                                 </span>
@@ -243,7 +245,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className='col-span-12 font-semibold mb-2'>District<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className="col-span-12">
-                                <input   {...formik.getFieldProps('district')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                <input   {...formik.getFieldProps('district')} value={formik.values.district} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter District" />
                                 <span className="text-red-600 text-xs">{formik.touched.district && formik.errors.district ? formik.errors.district : null}</span>
                                 </span>
@@ -252,7 +254,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className='col-span-12 font-semibold mb-2'>State<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className="col-span-12">
-                                <input {...formik.getFieldProps('state')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                <input {...formik.getFieldProps('state')} value={formik.values.state} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter State" />
                                 <span className="text-red-600 text-xs">{formik.touched.state && formik.errors.state ? formik.errors.state : null}</span>
                                 </span>
@@ -261,7 +263,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className='col-span-12 font-semibold mb-2'>Pin<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('pin')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                <input  {...formik.getFieldProps('pin')} value={formik.values.pin} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter Pin no." />
                                 <span className="text-red-600 text-xs">{formik.touched.pin && formik.errors.pin ? formik.errors.pin : null}</span>
                             </span>
@@ -270,7 +272,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className='col-span-12 font-semibold mb-2'>Property Address (enter full mailing address)<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('locality')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                <input  {...formik.getFieldProps('locality')} value={formik.values.locality} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter Property Address" />
                                 <span className="text-red-600 text-xs">{formik.touched.locality && formik.errors.locality ? formik.errors.locality : null}</span>
                                 </span>
@@ -278,7 +280,7 @@ function CitizenPropPropertyAddressDetails(props) {
 
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('addressCheckbox')} type="checkbox"
+                                <input  {...formik.getFieldProps('addressCheckbox')} value={formik.values.addressCheckbox} type="checkbox"
                                     className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                                 />
                                 <label className="form-check-label text-gray-800"> <span className='inline text-red-400 text-xs md:text-sm font-semibold'>Note : </span><small className="block mt-1 text-xs text-gray-600 inline ">If Corresponding Address Different from Property Address (Please Tick)</small></label> </span>
@@ -296,7 +298,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className='col-span-12 font-semibold mb-2'>City</label>
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('c_city')} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
+                                <input  {...formik.getFieldProps('c_city')} value={formik.values.c_city} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter City" />
                                 <span className="text-red-600 text-xs">{formik.touched.c_city && formik.errors.c_city ? formik.errors.c_city : null}</span>
                                 </span>
@@ -305,7 +307,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className='col-span-12 font-semibold mb-2'>District</label>
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('c_district')} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
+                                <input  {...formik.getFieldProps('c_district')} value={formik.values.c_district} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter District" />
                                 <span className="text-red-600 text-xs">{formik.touched.c_district && formik.errors.c_district ? formik.errors.c_district : null}</span>
                                 </span>
@@ -314,7 +316,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className='col-span-12 font-semibold mb-2'>State</label>
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('c_state')} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
+                                <input  {...formik.getFieldProps('c_state')} value={formik.values.c_state} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter State" />
                                 <span className="text-red-600 text-xs">{formik.touched.c_state && formik.errors.c_state ? formik.errors.c_state : null}</span>
                                 </span>
@@ -323,7 +325,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className='col-span-12 font-semibold mb-2'>Pin</label>
                                 <span className="col-span-12">
-                                <input  {...formik.getFieldProps('c_pin')} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
+                                <input  {...formik.getFieldProps('c_pin')} value={formik.values.c_pin} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter Pin" />
                                 <span className="text-red-600 text-xs">{formik.touched.c_pin && formik.errors.c_pin ? formik.errors.c_pin : null}</span>
                                 </span>
@@ -332,7 +334,7 @@ function CitizenPropPropertyAddressDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className='col-span-12 font-semibold mb-2'>Address <span className='font-normal'>(enter full mailing address)</span></label>
                                 <span className="col-span-12">
-                                <input {...formik.getFieldProps('c_locality')} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
+                                <input {...formik.getFieldProps('c_locality')} value={formik.values.c_locality} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter Address" />
                                 <span className="text-red-600 text-xs">{formik.touched.c_locality && formik.errors.c_locality ? formik.errors.c_locality : null}</span>
                                 </span>

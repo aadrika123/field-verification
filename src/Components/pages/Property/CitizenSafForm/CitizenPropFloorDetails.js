@@ -190,6 +190,7 @@ function CitizenPropFloorDetails(props) {
 
     useEffect(() => {
         props.collectFormDataFun('floorDetails', floorList, floorPreviewList)
+        setfloorPreviewList(props?.prevData)
     }, [floorList, floorPreviewList])
 
     //function to edit owner from owner list via index

@@ -34,15 +34,17 @@ function CitizenPropElectricityWaterDetails(props) {
     const formik = useFormik({
         initialValues: {
             elecToggleCheckbox: false,
-            electricityKNo: '',
-            accNo: '',
-            bindBookNo: '',
-            electrictyConsumerNo: '',
-            bpApprovalNo: '',
-            bpApprovalDate: '',
-            waterConsumerNo: '',
-            waterConnectionDate: '',
+            electricityKNo: props?.prevData?.electricityKNo,
+            accNo: props?.prevData?.accNo,
+            bindBookNo: props?.prevData?.bindBookNo,
+            electrictyConsumerNo: props?.prevData?.electrictyConsumerNo,
+            bpApprovalNo: props?.prevData?.bpApprovalNo,
+            bpApprovalDate: props?.prevData?.bpApprovalDate,
+            waterConsumerNo: props?.prevData?.waterConsumerNo,
+            waterConnectionDate: props?.prevData?.waterConnectionDate,
         },
+
+        enableReinitialize: true,
 
         onSubmit: (values, resetForm) => {
             console.log('electricity ', values)
@@ -100,7 +102,7 @@ function CitizenPropElectricityWaterDetails(props) {
                     <div className="p-6">
                         
                     <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
-                                <input {...formik.getFieldProps('elecToggleCheckbox')} type="checkbox"
+                                <input {...formik.getFieldProps('elecToggleCheckbox')} value={formik.values.elecToggleCheckbox} type="checkbox"
                                     className="col-span-1 appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" />
                                 <label className="text-gray-800 col-span-11" > <span className='inline text-red-400 text-sm font-semibold'>Note : </span><small className="block mt-1 text-xs text-gray-600 inline ">In case, there is no Electric Connection. You have to upload Affidavit Form-I. (Please Tick)</small></label>
                             </div>
@@ -109,7 +111,7 @@ function CitizenPropElectricityWaterDetails(props) {
                                
                                     <label className="col-span-12 font-semibold mb-2">Electricity K. No</label>
                                     <span className="col-span-12">
-                                    <input {...formik.getFieldProps('electricityKNo')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                    <input {...formik.getFieldProps('electricityKNo')} value={formik.values.electricityKNo} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                         placeholder="Enter Electricity K. No" />
                                     <span className="text-red-600 absolute text-xs">{formik.touched.electricityKNo && formik.errors.electricityKNo ? formik.errors.electricityKNo : null}</span></span>
                                 </div>
@@ -119,7 +121,7 @@ function CitizenPropElectricityWaterDetails(props) {
                                 <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                     <label className="col-span-12 font-semibold mb-2">ACC No.</label>
                                     <span className="col-span-12">
-                                    <input {...formik.getFieldProps('accNo')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                    <input {...formik.getFieldProps('accNo')} value={formik.values.accNo} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                         placeholder="Enter ACC No." />
                                     <span className="text-red-600 absolute text-xs">{formik.touched.accNo && formik.errors.accNo ? formik.errors.accNo : null}</span></span>
                                 </div>
@@ -127,7 +129,7 @@ function CitizenPropElectricityWaterDetails(props) {
                                 <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                     <label className="col-span-12 font-semibold mb-2">BIND/BOOK No.</label>
                                     <span className="col-span-12">
-                                    <input {...formik.getFieldProps('bindBookNo')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                    <input {...formik.getFieldProps('bindBookNo')} value={formik.values.bindBookNo} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                         placeholder="Enter BIND/BOOK No." />
                                     <span className="text-red-600 absolute text-xs">{formik.touched.bindBookNo && formik.errors.bindBookNo ? formik.errors.bindBookNo : null}</span></span>
                                 </div>
@@ -135,7 +137,7 @@ function CitizenPropElectricityWaterDetails(props) {
                                 <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                     <label className="col-span-12 font-semibold mb-2">Electricity Consumer Category</label>
                                     <span className="col-span-12">
-                                    <select {...formik.getFieldProps('electrictyConsumerNo')} className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                    <select {...formik.getFieldProps('electrictyConsumerNo')} value={formik.values.electrictyConsumerNo} className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     >
                                         <option value="">SELECT</option>
                                         <option value="DS I/II/III">DS I/II/III</option>
@@ -158,7 +160,7 @@ function CitizenPropElectricityWaterDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className="col-span-12 font-semibold mb-2">Building Plan Approval No.</label>
                                 <span className="col-span-12">
-                                <input {...formik.getFieldProps('bpApprovalNo')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-sm border-[1px] border-gray-400"
+                                <input {...formik.getFieldProps('bpApprovalNo')} value={formik.values.bpApprovalNo} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-sm border-[1px] border-gray-400"
                                     placeholder="Enter Building Plan Approval No." />
                                 <span className="text-red-600 absolute text-xs">{formik.touched.bpApprovalNo && formik.errors.bpApprovalNo ? formik.errors.bpApprovalNo : null}</span></span>
                             </div>
@@ -166,7 +168,7 @@ function CitizenPropElectricityWaterDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className="col-span-12 font-semibold mb-2">Building Plan Approval Date</label>
                                 <span className="col-span-12">
-                                <input {...formik.getFieldProps('bpApprovalDate')} type="date" className="bg-white px-2 py-1 w-full rounded-sm shadow-sm border-[1px] border-gray-400"
+                                <input {...formik.getFieldProps('bpApprovalDate')} value={formik.values.bpApprovalDate} type="date" className="bg-white px-2 py-1 w-full rounded-sm shadow-sm border-[1px] border-gray-400"
                                 />
                                 <span className="text-red-600 absolute text-xs">{formik.touched.bpApprovalDate && formik.errors.bpApprovalDate ? formik.errors.bpApprovalDate : null}</span></span>
                             </div>
@@ -181,7 +183,7 @@ function CitizenPropElectricityWaterDetails(props) {
         <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className="col-span-12 font-semibold mb-2">Water Consumer No.</label>
                                 <span className="col-span-12">
-                                <input {...formik.getFieldProps('waterConsumerNo')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                <input {...formik.getFieldProps('waterConsumerNo')} value={formik.values.waterConsumerNo} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Water Consumer No." />
                                 <span className="text-red-600 absolute text-xs">{formik.touched.waterConsumerNo && formik.errors.waterConsumerNo ? formik.errors.waterConsumerNo : null}</span></span>
                             </div>
@@ -189,7 +191,7 @@ function CitizenPropElectricityWaterDetails(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
                                 <label className="col-span-12 font-semibold mb-2">Water Connection Date</label>
                                 <span className="col-span-12">
-                                <input {...formik.getFieldProps('waterConnectionDate')} type="date" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                <input {...formik.getFieldProps('waterConnectionDate')} value={formik.values.waterConnectionDate} type="date" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                 />
                                 <span className="text-red-600 absolute text-xs">{formik.touched.waterConnectionDate && formik.errors.waterConnectionDate ? formik.errors.waterConnectionDate : null}</span></span>
                             </div>

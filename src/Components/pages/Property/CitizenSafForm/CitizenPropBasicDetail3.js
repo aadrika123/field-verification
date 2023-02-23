@@ -46,13 +46,13 @@ function CitizenPropBasicDetail3(props) {
     })
 
     const initialValues = {
-        transferMode: '',
-        dateOfPurchase: '',
-        ulbId: '',
-        wardNo: '',
-        newWardNo: '',
-        ownerShiptype: '',
-        propertyType: '',
+        transferMode: props?.prevData?.transferMode,
+        dateOfPurchase: props?.prevData?.dateOfPurchase,
+        ulbId: props?.prevData?.ulbId,
+        wardNo: props?.prevData?.wardNo,
+        newWardNo: props?.prevData?.newWardNo,
+        ownerShiptype: props?.prevData?.ownerShiptype,
+        propertyType: props?.prevData?.propertyType,
     };
 
     const formik = useFormik({
@@ -212,7 +212,7 @@ function CitizenPropBasicDetail3(props) {
                             {props?.safType == 'mu' && <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                 <label className='col-span-12 font-semibold mb-2'>Transfer Mode<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className='col-span-12'>
-                                <select id='basic_details_1' {...formik.getFieldProps('transferMode')} className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'>
+                                <select id='basic_details_1' {...formik.getFieldProps('transferMode')} value={formik.values.transferMode} className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'>
                                     <option value="" disabled selected>Select Transfer Mode</option>
                                     {
                                         props?.preFormData?.transfer_mode.map((data) => (
@@ -228,7 +228,7 @@ function CitizenPropBasicDetail3(props) {
                             {props?.safType == 'mu' && <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                 <label className='col-span-12 font-semibold mb-2'>Date of Purchase<small className="block mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className='col-span-12'>
-                                <input type='date' {...formik.getFieldProps('dateOfPurchase')} className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer' />
+                                <input type='date' {...formik.getFieldProps('dateOfPurchase')} value={formik.values.dateOfPurchase} className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer' />
                                 <span className="text-red-600 text-xs">{formik.touched.dateOfPurchase && formik.errors.dateOfPurchase ? formik.errors.dateOfPurchase : null}</span>
                                 </span>
                             </div>
@@ -237,7 +237,7 @@ function CitizenPropBasicDetail3(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                 <label className='col-span-12 font-semibold mb-2'>ULB<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className='col-span-12'>
-                                    <select id='basic_details_1' {...formik.getFieldProps('ulbId')} className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'>
+                                    <select id='basic_details_1' {...formik.getFieldProps('ulbId')} value={formik.values.ulbId} className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'>
                                     <option value="" disabled selected>select ULB</option>
                                     <option value="2" selected>Ranchi Nagar Nigam</option>
                                     {/* {
@@ -254,7 +254,7 @@ function CitizenPropBasicDetail3(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                 <label className='col-span-12 font-semibold mb-2'>Old Ward No<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className='col-span-12'>
-                                <select {...formik.getFieldProps('wardNo')} className={`${commonInputStyle} cursor-pointer cypress_ward`}>
+                                <select {...formik.getFieldProps('wardNo')} value={formik.values.wardNo} className={`${commonInputStyle} cursor-pointer cypress_ward`}>
                                     <option value="" disabled selected>select ward</option>
                                     {/* <option value="50" selected>50</option> */}
                                     {
@@ -272,7 +272,7 @@ function CitizenPropBasicDetail3(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                 <label className='col-span-12 font-semibold mb-2'>New Ward No<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className='col-span-12'>
-                                <select {...formik.getFieldProps('newWardNo')} className={`${commonInputStyle} cursor-pointer cypress_new_ward`} >
+                                <select {...formik.getFieldProps('newWardNo')} value={formik.values.newWardNo} className={`${commonInputStyle} cursor-pointer cypress_new_ward`} >
                                     <option value="" disabled selected>select new ward</option>
                                     {/* <option value="50" selected>50</option> */}
 
@@ -291,7 +291,7 @@ function CitizenPropBasicDetail3(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                 <label className='col-span-12 font-semibold mb-2'>Ownership Type<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className='col-span-12'>
-                                <select  {...formik.getFieldProps('ownerShiptype')} className={`${commonInputStyle} cursor-pointer cypress_ownership_type`}
+                                <select  {...formik.getFieldProps('ownerShiptype')} value={formik.values.ownerShiptype} className={`${commonInputStyle} cursor-pointer cypress_ownership_type`}
                                 >
                                     <option value="" disabled selected>select ownership type--</option>
                                     {
@@ -307,7 +307,7 @@ function CitizenPropBasicDetail3(props) {
                             <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
                                 <label className='col-span-12 font-semibold mb-2'>Property Type<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
                                 <span className='col-span-12'>
-                                <select {...formik.getFieldProps('propertyType')} className={`${commonInputStyle} cursor-pointer cypress_property_type`}
+                                <select {...formik.getFieldProps('propertyType')} value={formik.values.propertyType} className={`${commonInputStyle} cursor-pointer cypress_property_type`}
                                 >
                                     <option value="" disabled selected>select property type</option>
                                     {

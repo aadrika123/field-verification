@@ -114,6 +114,7 @@ function CitizenPropOwnerDetails(props) {
         if (props?.safType == 're' || props?.safType == 'mu') {
             feedPropertyData()
         }
+        setownerPreviewList(props?.prevData)
     }, [props?.existingPropertyDetails])
 
     console.log('existing property details...', props?.existingPropertyDetails?.data?.data)
@@ -487,7 +488,7 @@ function CitizenPropOwnerDetails(props) {
                                     <>
                                     <div className={`${AddOwnerForm == 'translate-y-0 top-[100px]' ? 'hidden' : 'block'} bg-indigo-50 border-2 border-indigo-500 my-2 mx-1`}>
                 <div className='text-white bg-indigo-500 px-2 font-semibold flex flex-row justify-between items-center'>
-                    <span>{index + 1}. {data?.ownerName}</span>
+                    <span>Owner {index + 1}</span>
                     {index >= previousOwnerArrayLength && props?.safType != 're' && <span className='flex gap-2 py-1'>
                         <button className='text-xs font-normal px-2 py-1 rounded-sm bg-green-500 hover:bg-green-600 focus:bg-green-600' onClick={() => editOwner(index)}>Edit</button>
                         <button className='text-xs font-normal px-2 py-1 rounded-sm bg-red-500 hover:bg-red-600 focus:bg-red-600' onClick={() => removeOwner(index)}>Delete</button>
@@ -495,6 +496,11 @@ function CitizenPropOwnerDetails(props) {
                 </div>
 
                 <div className='px-2 py-2'>
+
+                <div className="grid grid-cols-12 text-sm pb-2">
+                        <span className=' col-span-6 font-semibold'>Name</span>
+                        <span className='col-span-6'>{data?.ownerName == '' ? 'N/A' : data?.ownerName}</span>
+                    </div>
 
                 <div className="grid grid-cols-12 text-sm pb-2">
                         <span className=' col-span-6 font-semibold'>Gender</span>
@@ -552,13 +558,6 @@ function CitizenPropOwnerDetails(props) {
                     </div>
                     
                 </div>
-
-                    {/* <div>
-                        <div className='bg-red-50 text-red-400 px-2 py-2 rounded-sm shadow-lg opacity-80 mt-10 text-sm'>
-                            <AiFillInfoCircle className="inline mr-2" />
-                            Click add owner button to add owner of the property, You can add multiple owners by repeating the same method
-                        </div>
-                    </div> */}
 
                 </div>
                 </>)
