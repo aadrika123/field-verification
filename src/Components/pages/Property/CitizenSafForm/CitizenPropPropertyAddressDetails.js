@@ -13,7 +13,7 @@ import { useState, useEffect } from 'react'
 import { RiBuilding2Fill } from 'react-icons/ri'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { allowCharacterCommaInput, allowCharacterNumberInput, allowCharacterInput, allowNumberCharacterInput, allowNumberCommaInput, allowCharacterSpaceCommaInput, allowFloatInput, allowNumberInput, allowCharacterNumberSpaceCommaInput } from '../../../Components/Common/PowerUps/PowerupFunctions'
+import { allowCharacterCommaInput, allowCharacterNumberInput, allowCharacterInput, allowNumberCharacterInput, allowNumberCommaInput, allowCharacterSpaceCommaInput, allowFloatInput, allowNumberInput, allowCharacterNumberSpaceCommaInput } from '../../Common/PowerUps/PowerupFunctions'
 
 
 function CitizenPropPropertyAddressDetails(props) {
@@ -85,28 +85,6 @@ function CitizenPropPropertyAddressDetails(props) {
         }
         , validationSchema
     })
-
-//    let setDisable = (tempReadOnly)=>{
-//     setreadOnly({tempReadOnly,plotNo:false})
-//     }
-//     // GENERATING STATE KEYS FROM FORMIK FOR READONLY ATTRIBUTE TOGGLE //
-//     const [readOnly, setreadOnly] = useState({})
-//     const createFormikStateVariables = () => {
-//         let listOfInputs = Object.keys(formik.initialValues)
-//         let tempReadOnly = { ...readOnly }
-
-//         listOfInputs.map((data) => {
-//             tempReadOnly = { ...tempReadOnly, [data]: true }
-//         })
-//         setreadOnly(tempReadOnly)
-//         console.log('after readonly.....', tempReadOnly)
-//         setDisable(tempReadOnly)
-//     }
-//     useEffect(() => {
-//         createFormikStateVariables()
-//     }, [])
-    // GENERATING STATE KEYS FROM FORMIK FOR READONLY ATTRIBUTE TOGGLE //
-
     const handleChange = (e) => {
         let name = e.target.name
         let value = e.target.value
@@ -130,7 +108,7 @@ function CitizenPropPropertyAddressDetails(props) {
         { name == 'c_locality' && formik.setFieldValue("c_locality", allowCharacterNumberSpaceCommaInput(value, formik.values.c_locality, 200)) }
     }
     useEffect(() => {
-        if (props?.safType == 're' || props?.safType == 'mu' || props?.safType == 'bo-edit') {
+        if (props?.safType == 're' || props?.safType == 'mu') {
             feedPropertyData()
         }
     }, [props?.existingPropertyDetails, props?.safType])
@@ -138,8 +116,8 @@ function CitizenPropPropertyAddressDetails(props) {
         setLocationByUlb()
     }, [props?.ulbLocation])
 
-
-
+    
+    
 
     const setLocationByUlb = () => {
         console.log('inside location in address...', props?.ulbLocation)
@@ -189,147 +167,192 @@ function CitizenPropPropertyAddressDetails(props) {
 
 
     }
+
     return (
         <>
-            {/* <h1 className='mt-6 mb-2 font-serif font-semibold absolute text-gray-600'><RiBuilding2Fill className="inline mr-2" />Property Address & Details</h1> */}
+             <form className='border-2 border-blue-700 bg-blue-50 mb-4 m-2'  onChange={handleChange} onSubmit={formik.handleSubmit} >
 
-            <div className="block p-4 w-full md:py-6 rounded-lg shadow-lg bg-white mx-auto absolute top-8 border border-gray-200">
+                <h1 className='text-center font-semibold bg-blue-700 text-white uppercase text-lg'>Property Detatils</h1>
 
-                <form onSubmit={formik.handleSubmit} onChange={handleChange}>
-                    <div className="grid grid-cols-1 md:grid-cols-4">
-                        <div className="col-span-4 grid grid-cols-1 md:grid-cols-5">
-                            <div className="form-group col-span-4 md:col-span-1 mb-6 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">Khata No.<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
-                                <input  {...formik.getFieldProps('khataNo')} type="text" className="cypress_khata_no form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none placeholder-gray-300 shadow-md"
+                <div className="p-6">
+
+                        <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
+                                <label className='col-span-12 font-semibold mb-2'>Khata No.<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
+                                <span className="col-span-12">
+                                <input  {...formik.getFieldProps('khataNo')} type="text" className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter Khata No." />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.khataNo && formik.errors.khataNo ? formik.errors.khataNo : null}</span>
-                            </div>
-                            <div className="form-group mb-6 col-span-4 md:col-span-1 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">Plot No<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
-                                <input  {...formik.getFieldProps('plotNo')} type="text" className="cypress_plot_no form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none placeholder-gray-300 shadow-md"
-                                    placeholder="Enter Plot No." />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.plotNo && formik.errors.plotNo ? formik.errors.plotNo : null}</span>
-                            </div>
-                            <div className="form-group mb-6 col-span-4 md:col-span-1 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">Village/Mauja Name<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
-                                <input  {...formik.getFieldProps('village_mauja')} type="text" className="cypress_village form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none placeholder-gray-300 shadow-md"
-                                    placeholder="Enter Village/Mauja Name" />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.village_mauja && formik.errors.village_mauja ? formik.errors.village_mauja : null}</span>
-                            </div>
-                            <div className="form-group mb-6 col-span-4 md:col-span-1 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">Area of Plot (in Decimal)</label>
-                                <input  {...formik.getFieldProps('plotArea')} type="text" className="cypress_plot_area form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none placeholder-gray-300 shadow-md"
-                                    placeholder="EnterArea of Plot." />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.plotArea && formik.errors.plotArea ? formik.errors.plotArea : null}</span>
+                                <span className="text-red-600 text-xs">{formik.touched.khataNo && formik.errors.khataNo ? formik.errors.khataNo : null}</span>
+                                </span>
                             </div>
 
-                            <div className="form-group mb-6 col-span-4 md:col-span-1 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">Road Width (in ft)<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small> </label>
-                                <input  {...formik.getFieldProps('roadWidth')} type="text" className="cypress_road_width form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none placeholder-gray-300 shadow-md"
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
+                                <label className='col-span-12 font-semibold mb-2'>Plot No<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
+                                <span className="col-span-12">
+                                <input  {...formik.getFieldProps('plotNo')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                    placeholder="Enter Plot No." />
+                                <span className="text-red-600 text-xs">{formik.touched.plotNo && formik.errors.plotNo ? formik.errors.plotNo : null}</span>
+                                </span>
+                            </div>
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
+                                <label className='col-span-12 font-semibold mb-2'>Village/Mauja Name<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
+                                <span className="col-span-12">
+                                <input  {...formik.getFieldProps('village_mauja')} type="text" className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
+                                    placeholder="Enter Village/Mauja Name" />
+                                <span className="text-red-600 text-xs">{formik.touched.village_mauja && formik.errors.village_mauja ? formik.errors.village_mauja : null}</span>
+                                </span>
+                            </div>
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
+                                <label className='col-span-12 font-semibold mb-2'>Area of Plot (in Decimal)</label>
+                                <span className="col-span-12">
+                                <input  {...formik.getFieldProps('plotArea')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
+                                    placeholder="EnterArea of Plot." />
+                                <span className="text-red-600 text-xs">{formik.touched.plotArea && formik.errors.plotArea ? formik.errors.plotArea : null}</span>
+                                </span>
+                            </div>
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6">
+                                <label className='col-span-12 font-semibold mb-2'>Road Width (in ft)<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small> </label>
+                                <span className="col-span-12">
+                                <input  {...formik.getFieldProps('roadWidth')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter Road Width" />
-                                <label className='hidden'><small className="block mt-1 text-xs text-gray-600 inline text-red-400 leading-tight">In Case of No Road Enter "0" (For Vacant Land Only)</small></label>
-                                <span className="text-red-600 absolute text-xs">{formik.touched.roadWidth && formik.errors.roadWidth ? formik.errors.roadWidth : null}</span>
+                                {/* <label className='hidden'><small className="block mt-1 text-xs text-gray-600 inline text-red-400 leading-tight">In Case of No Road Enter "0" (For Vacant Land Only)</small></label> */}
+                                <span className="text-red-600 text-xs">{formik.touched.roadWidth && formik.errors.roadWidth ? formik.errors.roadWidth : null}</span>
+                                </span>
                             </div>
                         </div>
-                        <div className="col-span-4 grid grid-cols-5 justify-center items-center">
-                            <div className="col-span-2 flex justify-center items-center w-full h-[1px] bg-blue-200"></div>
-                            <div className='flex justify-center items-center'><label className="form-check-label text-gray-800"> <small className="block mt-1 text-xs text-blue-400 inline md:px-4 font-mono text-center">Basic Address</small></label></div>
-                            <div className="col-span-2 flex justify-center items-center w-full h-[1px] bg-blue-200"></div>
+
+                        <div className="grid grid-cols-12 justify-center items-center -p-6">
+                            <div className="col-span-4 flex justify-center items-center w-full h-[1px] bg-blue-200"></div>
+                            <div className='flex justify-center items-center col-span-4'><label className=" text-gray-800"> <small className="block mt-1 text-xs text-blue-400 inline md:px-4 font-mono text-center">Basic Address</small></label></div>
+                            <div className="col-span-4 flex justify-center items-center w-full h-[1px] bg-blue-200"></div>
                         </div>
 
                         {/* Basic address */}
-                        <div className="col-span-4 grid grid-cols-1 md:grid-cols-4">
-                            <div className="form-group mb-6 col-span-4 md:col-span-1 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">City<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
-                                <input readOnly={true} {...formik.getFieldProps('city')} type="text" className="form-control block w-full px-3 py-1.5 text-base font-norma ltext-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 placeholder-gray-300 shadow-md bg-gray-200"
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
+                                <label className='col-span-12 font-semibold mb-2'>City<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
+                                <span className="col-span-12">
+                                <input  {...formik.getFieldProps('city')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter City" />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.city && formik.errors.city ? formik.errors.city : null}</span>
+                                <span className="text-red-600 text-xs">{formik.touched.city && formik.errors.city ? formik.errors.city : null}</span>
+                                </span>
                             </div>
-                            <div className="form-group mb-6 col-span-4 md:col-span-1 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">District<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
-                                <input readOnly={true}  {...formik.getFieldProps('district')} type="text" className="form-control block w-full px-3 py-1.5 text-base font-norma ltext-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 placeholder-gray-300 shadow-md bg-gray-200"
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
+                                <label className='col-span-12 font-semibold mb-2'>District<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
+                                <span className="col-span-12">
+                                <input   {...formik.getFieldProps('district')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter District" />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.district && formik.errors.district ? formik.errors.district : null}</span>
+                                <span className="text-red-600 text-xs">{formik.touched.district && formik.errors.district ? formik.errors.district : null}</span>
+                                </span>
                             </div>
-                            <div className="form-group mb-6 col-span-4 md:col-span-1 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">State<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
-                                <input readOnly={true} {...formik.getFieldProps('state')} type="text" className="form-control block w-full px-3 py-1.5 text-base font-norma ltext-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 placeholder-gray-300 shadow-md bg-gray-200"
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
+                                <label className='col-span-12 font-semibold mb-2'>State<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
+                                <span className="col-span-12">
+                                <input {...formik.getFieldProps('state')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter State" />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.state && formik.errors.state ? formik.errors.state : null}</span>
+                                <span className="text-red-600 text-xs">{formik.touched.state && formik.errors.state ? formik.errors.state : null}</span>
+                                </span>
                             </div>
-                            <div className="form-group mb-6 col-span-4 md:col-span-1 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">Pin<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
-                                <input  {...formik.getFieldProps('pin')} type="text" className="cypress_pin form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none placeholder-gray-300 shadow-md"
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
+                                <label className='col-span-12 font-semibold mb-2'>Pin<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
+                                <span className="col-span-12">
+                                <input  {...formik.getFieldProps('pin')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter Pin no." />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.pin && formik.errors.pin ? formik.errors.pin : null}</span>
+                                <span className="text-red-600 text-xs">{formik.touched.pin && formik.errors.pin ? formik.errors.pin : null}</span>
+                            </span>
                             </div>
-                            <div className="form-group mb-6 col-span-4 md:col-span-4 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">Property Address (enter full mailing address)<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
-                                <input  {...formik.getFieldProps('locality')} type="text" className="cypress_address form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none placeholder-gray-300 shadow-md"
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
+                                <label className='col-span-12 font-semibold mb-2'>Property Address (enter full mailing address)<small className="mt-1 text-xs md:text-sm font-semibold text-red-600 inline ">*</small></label>
+                                <span className="col-span-12">
+                                <input  {...formik.getFieldProps('locality')} type="text" className="bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer"
                                     placeholder="Enter Property Address" />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.locality && formik.errors.locality ? formik.errors.locality : null}</span>
+                                <span className="text-red-600 text-xs">{formik.touched.locality && formik.errors.locality ? formik.errors.locality : null}</span>
+                                </span>
                             </div>
-                            <div className="form-group col-span-4 form-check mb-2 md:px-4">
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
+                                <span className="col-span-12">
                                 <input  {...formik.getFieldProps('addressCheckbox')} type="checkbox"
                                     className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                                 />
-                                <label className="form-check-label text-gray-800"> <span className='inline text-red-400 text-sm font-semibold'>Note : </span><small className="block mt-1 text-xs text-gray-600 inline ">If Corresponding Address Different from Property Address (Please Tick)</small></label>
+                                <label className="form-check-label text-gray-800"> <span className='inline text-red-400 text-xs md:text-sm font-semibold'>Note : </span><small className="block mt-1 text-xs text-gray-600 inline ">If Corresponding Address Different from Property Address (Please Tick)</small></label> </span>
                             </div>
-                        </div>
 
                         {/* Corresponding  address */}
-                        <div className={`col-span-4 ${!formOpen ? 'hidden' : 'grid'} grid-cols-1 md:grid-cols-4`}>
-                            <div className="col-span-4 grid grid-cols-5 justify-center items-center">
-                                <div className="col-span-2 flex justify-center items-center w-full h-[1px] bg-blue-200"></div>
-                                <div className='flex justify-center items-center'><label className="form-check-label text-gray-800"> <small className="block mt-1 text-xs text-blue-400 inline md:px-4 font-mono text-center">Corresponding Address</small></label></div>
-                                <div className="col-span-2 flex justify-center items-center w-full h-[1px] bg-blue-200"></div>
+                        <div className={`${!formOpen ? 'hidden' : 'visible'}`}>
+
+                            <div className="grid grid-cols-12 justify-center items-center">
+                                <div className="col-span-3 flex justify-center items-center w-full h-[1px] bg-blue-200"></div>
+                                <div className='col-span-6 flex justify-center items-center'><label className="form-check-label text-gray-800"> <small className="block mt-1 text-xs text-blue-400 inline md:px-4 font-mono text-center">Corresponding Address</small></label></div>
+                                <div className="col-span-3 flex justify-center items-center w-full h-[1px] bg-blue-200"></div>
                             </div>
-                            <div className="form-group mb-6 col-span-4 md:col-span-1 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">City</label>
-                                <input  {...formik.getFieldProps('c_city')} type="text" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none placeholder-gray-300 shadow-md"
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
+                                <label className='col-span-12 font-semibold mb-2'>City</label>
+                                <span className="col-span-12">
+                                <input  {...formik.getFieldProps('c_city')} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter City" />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.c_city && formik.errors.c_city ? formik.errors.c_city : null}</span>
+                                <span className="text-red-600 text-xs">{formik.touched.c_city && formik.errors.c_city ? formik.errors.c_city : null}</span>
+                                </span>
                             </div>
-                            <div className="form-group mb-6 col-span-4 md:col-span-1 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">District</label>
-                                <input  {...formik.getFieldProps('c_district')} type="text" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none placeholder-gray-300 shadow-md"
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
+                                <label className='col-span-12 font-semibold mb-2'>District</label>
+                                <span className="col-span-12">
+                                <input  {...formik.getFieldProps('c_district')} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter District" />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.c_district && formik.errors.c_district ? formik.errors.c_district : null}</span>
+                                <span className="text-red-600 text-xs">{formik.touched.c_district && formik.errors.c_district ? formik.errors.c_district : null}</span>
+                                </span>
                             </div>
-                            <div className="form-group mb-6 col-span-4 md:col-span-1 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">State</label>
-                                <input  {...formik.getFieldProps('c_state')} type="text" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none placeholder-gray-300 shadow-md"
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
+                                <label className='col-span-12 font-semibold mb-2'>State</label>
+                                <span className="col-span-12">
+                                <input  {...formik.getFieldProps('c_state')} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter State" />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.c_state && formik.errors.c_state ? formik.errors.c_state : null}</span>
+                                <span className="text-red-600 text-xs">{formik.touched.c_state && formik.errors.c_state ? formik.errors.c_state : null}</span>
+                                </span>
                             </div>
-                            <div className="form-group mb-6 col-span-4 md:col-span-1 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">Pin</label>
-                                <input  {...formik.getFieldProps('c_pin')} type="text" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none placeholder-gray-300 shadow-md"
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
+                                <label className='col-span-12 font-semibold mb-2'>Pin</label>
+                                <span className="col-span-12">
+                                <input  {...formik.getFieldProps('c_pin')} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter Pin" />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.c_pin && formik.errors.c_pin ? formik.errors.c_pin : null}</span>
+                                <span className="text-red-600 text-xs">{formik.touched.c_pin && formik.errors.c_pin ? formik.errors.c_pin : null}</span>
+                                </span>
                             </div>
-                            <div className="form-group mb-6 col-span-4 md:col-span-4 md:px-4">
-                                <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">Address <span className='font-normal'>(enter full mailing address)</span></label>
-                                <input {...formik.getFieldProps('c_locality')} type="text" className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none placeholder-gray-300 shadow-md"
+
+                            <div className="grid grid-cols-12 text-sm text-gray-700 mb-6 px-6">
+                                <label className='col-span-12 font-semibold mb-2'>Address <span className='font-normal'>(enter full mailing address)</span></label>
+                                <span className="col-span-12">
+                                <input {...formik.getFieldProps('c_locality')} type="text"  className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'
                                     placeholder="Enter Address" />
-                                <span className="text-red-600 absolute text-xs">{formik.touched.c_locality && formik.errors.c_locality ? formik.errors.c_locality : null}</span>
+                                <span className="text-red-600 text-xs">{formik.touched.c_locality && formik.errors.c_locality ? formik.errors.c_locality : null}</span>
+                                </span>
                             </div>
-
+                            
                         </div>
 
-                        <div className="col-span-4 grid grid-cols-2">
-                            <div className='md:px-4'>
-                                <button onClick={() => props.backFun(2)} type="button" className=" px-6 py-2.5 bg-gray-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out">Back</button>
+                        <div className='grid grid-cols-12 mt-10 px-6 mb-4'>
+                            <div className='col-span-6'>
+                                <button onClick={() => props.backFun(2)} type="button" className=" px-4  py-1.5 bg-gray-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out">Back</button>
                             </div>
-                            <div className='md:px-10 text-right'>
-                                <button type="submit" className="cypress_next2_button px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs leading-tight  rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out">Save & Next</button>
+                            <div className='text-right col-span-6'>
+                                <button type="submit" className="cypress_next2_button px-4 py-1.5 bg-indigo-600 text-white font-medium text-xs leading-tight  rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out">Save & Next</button>
                             </div>
                         </div>
 
-                    </div>
+                    
 
                 </form>
-            </div>
+           
         </>
     )
 }

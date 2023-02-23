@@ -12,8 +12,8 @@ import { useState, useEffect } from 'react'
 import { FaHome } from 'react-icons/fa'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { getCurrentDate, allowFloatInput } from '../../../Components/Common/PowerUps/PowerupFunctions'
-import { inputContainerStyle, commonInputStyle, inputErrorStyle, inputLabelStyle } from '../../../Components/Common/CommonTailwind/CommonTailwind'
+import { getCurrentDate, allowFloatInput } from '../../Common/PowerUps/PowerupFunctions'
+import { inputContainerStyle, commonInputStyle, inputErrorStyle, inputLabelStyle } from '../../Common/CommonTailwind/CommonTailwind'
 import { useNavigate } from 'react-router-dom'
 
 function CitizenPropBasicDetail2(props) {

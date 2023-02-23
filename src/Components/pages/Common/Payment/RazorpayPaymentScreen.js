@@ -1,5 +1,5 @@
 import axios from "axios";
-import CitizenApplyApiList from "./CitizenApplyApiList";
+import CitizenApplyApiList from "../../../api/CitizenApplyApiList";
 
 const { verifyPaymentStatus } = CitizenApplyApiList();
 

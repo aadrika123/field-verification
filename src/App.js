@@ -11,7 +11,7 @@ import PropertyVerificationForm from "./Components/pages/Property/PropertyVerifi
 import SearchApplications from "./Components/pages/Common/SearchApplications";
 import VerifyForm from "./Components/pages/Property/FieldVerification/VerifyForm";
 import GeoIndex from "./Components/pages/Property/GeoTagging/GeoIndex";
-// import CitizenPropSafApplicationFormIndex from "./Components/pages/Property/CitizenSafForm/CitizenPropSafApplicationFormIndex";
+import CitizenPropSafApplicationFormIndex from "./Components/pages/Property/CitizenSafForm/CitizenPropSafApplicationFormIndex";
 
 const App = () => {
   const [loader, setloader] = useState(false);
@@ -60,7 +60,7 @@ const App = () => {
 
               <Route path="/geoTagging/:id" element={<GeoIndex /> } />
 
-              {/* <Route path="/safform" element={<CitizenPropSafApplicationFormIndex /> } /> */}
+              <Route path="/safform/:safType/:safId" element={<CitizenPropSafApplicationFormIndex /> } />
 
             </Routes>
           </>

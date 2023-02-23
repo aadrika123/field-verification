@@ -17,7 +17,7 @@ import CitizenPropPropertyAddressDetails from './CitizenPropPropertyAddressDetai
 import CitizenPropOwnerDetails from './CitizenPropOwnerDetails'
 import CitizenPropFloorDetails from './CitizenPropFloorDetails'
 import 'react-toastify/dist/ReactToastify.css';
-import FormSubmitResponse from '../../../Components/Common/ResponseScreen/FormSubmitResponse'
+import FormSubmitResponse from '../../Common/ResponseScreen/FormSubmitResponse'
 import { useNavigate, useParams } from 'react-router-dom'
 import { contextVar } from '../../Common/context/contextVar'
 import axios from 'axios'
@@ -48,15 +48,15 @@ function CitizenPropSafApplicationFormIndex() {
     const { notify } = useContext(contextVar)     //////global toast function/////
     const navigate = useNavigate()
     const [formIndex, setFormIndex] = useState(1) ///{***✅ formindex specifies type of form like basicdetails at index 1 ...***}///
-    const [animateform1, setAnimateform1] = useState('translate-x-0 mb-40') ////{***slide animation control state for BasicDetails form***}////
-    const [animateform2, setAnimateform2] = useState('pl-20 translate-x-full')////{***slide animation control state for PropertyAddressDetails form***}///
-    const [animateform3, setAnimateform3] = useState('pl-20 translate-x-full')//{***slide animation control state for ElectricityWaterDetails form***}//   
-    const [animateform4, setAnimateform4] = useState('pl-20 translate-x-full')/////{*** slide animation control state for OwnerDetails form***}///
-    const [animateform5, setAnimateform5] = useState('pl-20 translate-x-full')///{*** slide animation control state for FloorDetails form***}///
-    const [animateform6, setAnimateform6] = useState('pl-20 translate-x-full')////{***slide animation control state for reviewForm page***}////
-    const [animateform7, setAnimateform7] = useState('pl-20 translate-x-full')///{*** slide animation control state for formDemand page***}///
-    const [animateform8, setAnimateform8] = useState('pl-20 translate-x-full')/////{***slide animation control state for payment page***}////
-    const [animateform9, setAnimateform9] = useState('pl-20 translate-x-full')/////{***slide animation control state for payment page***}////
+    const [animateform1, setAnimateform1] = useState(true) ////{***slide animation control state for BasicDetails form***}////
+    const [animateform2, setAnimateform2] = useState(false)////{***slide animation control state for PropertyAddressDetails form***}///
+    const [animateform3, setAnimateform3] = useState(false)//{***slide animation control state for ElectricityWaterDetails form***}//   
+    const [animateform4, setAnimateform4] = useState(false)/////{*** slide animation control state for OwnerDetails form***}///
+    const [animateform5, setAnimateform5] = useState(false)///{*** slide animation control state for FloorDetails form***}///
+    const [animateform6, setAnimateform6] = useState(false)////{***slide animation control state for reviewForm page***}////
+    const [animateform7, setAnimateform7] = useState(false)///{*** slide animation control state for formDemand page***}///
+    const [animateform8, setAnimateform8] = useState(false)/////{***slide animation control state for payment page***}////
+    const [animateform9, setAnimateform9] = useState(false)/////{***slide animation control state for payment page***}////
     const [preFormData, setPreFormData] = useState()///{***state variable to hold all form required data***}///
     const [safSubmitResponse, setsafSubmitResponse] = useState()////{***state variable to hold response data after submitting the saf form***}//
     const [show, setshow] = useState(false)////{***slide animation control state for BasicDetails form***}///
@@ -78,14 +78,14 @@ function CitizenPropSafApplicationFormIndex() {
     const [previewCloseStatus, setpreviewCloseStatus] = useState(false)
 
 
-    const moveToTop = () => {
-        viewRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    };
+    // const moveToTop = () => {
+    //     viewRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    // };
 
 
     useEffect(() => {
         if (formIndex < 7) {
-            moveToTop()
+            // moveToTop()
         }
         if (formIndex == 7) {
             submitRuelsetData()
@@ -108,45 +108,45 @@ function CitizenPropSafApplicationFormIndex() {
             //> go to form index 1 since back from index 2
             setFormIndex(1)
             //> always setstate one index less than current index
-            setAnimateform1('translate-x-0 mb-40')
+            setAnimateform1(true)
             //> always current index setstate
-            setAnimateform2('pl-20 translate-x-full mb-0')
+            setAnimateform2(false)
         }
         if (tempFormIndex == 3) {
             setFormIndex(2)
-            setAnimateform2('translate-x-0 mb-40')
-            setAnimateform3('pl-20 translate-x-full mb-0')
+            setAnimateform2(true)
+            setAnimateform3(false)
         }
         if (tempFormIndex == 4) {
             setFormIndex(3)
-            setAnimateform3('translate-x-0 mb-40')
-            setAnimateform4('pl-20 translate-x-full mb-0')
+            setAnimateform3(true)
+            setAnimateform4(false)
         }
         if (tempFormIndex == 5) {
             setFormIndex(4)
-            setAnimateform4('translate-x-0 mb-40')
-            setAnimateform5('pl-20 translate-x-full mb-0')
+            setAnimateform4(true)
+            setAnimateform5(false)
         }
         if (tempFormIndex == 6) {
             setFormIndex(5)
-            setAnimateform5('translate-x-0 mb-40')
-            setAnimateform6('pl-20 translate-x-full mb-0')
+            setAnimateform5(true)
+            setAnimateform6(false)
         }
         if (tempFormIndex == 7) {
             setFormIndex(6)
-            setAnimateform6('translate-x-0 mb-40')
-            setAnimateform7('pl-20 translate-x-full mb-0')
+            setAnimateform6(true)
+            setAnimateform7(false)
         }
         if (tempFormIndex == 8) {
             setformHeadStatus(true)
             setFormIndex(7)
-            setAnimateform7('translate-x-0 mb-40')
-            setAnimateform8('pl-20 translate-x-full mb-0')
+            setAnimateform7(true)
+            setAnimateform8(false)
         }
         if (tempFormIndex == 9) {
             setFormIndex(8)
-            setAnimateform8('translate-x-0 mb-40')
-            setAnimateform9('pl-20 translate-x-full mb-0')
+            setAnimateform8(true)
+            setAnimateform9(false)
         }
 
 
@@ -162,55 +162,55 @@ function CitizenPropSafApplicationFormIndex() {
             setFormIndex(2)
 
             ///// always current index setstate////
-            setAnimateform1(' -translate-x-full right-80 mb-0')
+            setAnimateform1(false)
 
             //// always setstate one index greater than current index////
-            setAnimateform2('pl-0 translate-x-0 mb-40')
+            setAnimateform2(true)
         }
         if (tempFormIndex == 2) {
             setFormIndex(3)
-            setAnimateform2('-translate-x-full right-80 mb-0')
-            setAnimateform3('pl-0 translate-x-0 mb-40')
+            setAnimateform2(false)
+            setAnimateform3(true)
         }
         if (tempFormIndex == 3) {
             setFormIndex(4)
-            setAnimateform3('-translate-x-full right-80 mb-0')
-            setAnimateform4('pl-0 translate-x-0 mb-40')
+            setAnimateform3(false)
+            setAnimateform4(true)
         }
         if (tempFormIndex == 4) {
             setFormIndex(5)
-            setAnimateform4('-translate-x-full right-80 mb-0')
-            setAnimateform5('pl-0 translate-x-0 mb-40')
+            setAnimateform4(false)
+            setAnimateform5(true)
         }
         if (tempFormIndex == 5) {
             setFormIndex(6)
-            setAnimateform5('-translate-x-full right-80 mb-0')
-            setAnimateform6('pl-0 translate-x-0 mb-40')
+            setAnimateform5(false)
+            setAnimateform6(true)
         }
         if (tempFormIndex == 6) {
             // submitRuelsetData()
             setformHeadStatus(false)
 
             setFormIndex(7)
-            setAnimateform6('-translate-x-full right-80 mb-0')
-            setAnimateform7('pl-0 translate-x-0 mb-40')
+            setAnimateform6(false)
+            setAnimateform7(true)
         }
         if (tempFormIndex == 7) {
 
             // IF BO EDIT THEN DONT SHOW DEMAND ONLY UPDATE PAGE SHOW
             if (safType == 'bo-edit') {
                 setFormIndex(9)
-                setAnimateform7('-translate-x-full right-80 mb-0')
+                setAnimateform7(false)
                 return
             }
             setFormIndex(8)
-            setAnimateform7('-translate-x-full right-80 mb-0')
-            setAnimateform8('pl-0 translate-x-0 mb-40')
+            setAnimateform7(false)
+            setAnimateform8(true)
         }
         // if (tempFormIndex == 7) {
         //     setFormIndex(8)
-        //     setAnimateform7('-translate-x-full right-80 mb-0')
-        //     setAnimateform8('pl-0 translate-x-0 mb-40')
+        //     setAnimateform7(false)
+        //     setAnimateform8(true)
         // }
 
     }
@@ -225,6 +225,7 @@ function CitizenPropSafApplicationFormIndex() {
     const submitSafForm = () => {
         setLoaderStatus(true)
         let token = window.localStorage.getItem('token')
+        console.log('token at basic details is post method...', token)
         const header = {
             headers:
             {
@@ -510,57 +511,22 @@ function CitizenPropSafApplicationFormIndex() {
             }
         }
 
-        //* REQUESTBODY FOR BO-EDIT-CASE
-        if (safType == 'bo-edit') {
-            requestBody = {
+        console.log('form submit request body....', requestBody)
 
+        //* setting api urls for new, re and mutation case
+        // let url
+        // if(safType=='new'){
+        //     url = api_postNewAssessment
+        // }
+        // if(safType=='re'){
+        //     url = api_postNewAssessment
+        // }
+        // if(safType=='mu'){
+        //     url = api_postNewAssessment
+        // }
 
-
-                //** ELECTRICITY & WATER DETAILS
-                // electricityConnection: true,
-                id: existingPropertyDetails?.data?.data?.id,
-                electricityCustNo: allFormData.electricityWaterDetails.electricityKNo,
-                electricityAccNo: allFormData.electricityWaterDetails.electricityAccNo,
-                electricityBindBookNo: allFormData.electricityWaterDetails.bindBookNo,
-                electricityConsCategory: allFormData.electricityWaterDetails.electrictyConsumerNo,
-                buildingPlanApprovalNo: allFormData.electricityWaterDetails.bpApprovalNo,
-                buildingPlanApprovalDate: allFormData.electricityWaterDetails.bpApprovalDate,
-                waterConnNo: allFormData.electricityWaterDetails.waterConsumerNo,
-                waterConnDate: allFormData.electricityWaterDetails.waterConnectionDate,
-
-                //** PROPERTY ADDRESS EXTRA
-                khataNo: allFormData.propertyAddressDetails.khataNo,
-                plotNo: allFormData.propertyAddressDetails.plotNo,
-                villageMaujaName: allFormData.propertyAddressDetails.villageMaujaName,
-
-                //* PROPERTY ADDRESS MAIN
-                propCity: allFormData?.propertyAddressDetails?.city,
-                propDist: allFormData?.propertyAddressDetails?.district,
-                propPinCode: allFormData?.propertyAddressDetails?.pin,
-                propState: allFormData?.propertyAddressDetails?.state,
-                propAddress: allFormData?.propertyAddressDetails?.locality,
-
-                //* CORRESPONDING ADDRESS
-                corrCity: correspondingAddress?.corrCity,
-                corrDist: correspondingAddress?.corrDist,
-                corrPinCode: correspondingAddress?.corrPinCode,
-                corrState: correspondingAddress?.corrState,
-                propAddress: correspondingAddress?.corrAddress,
-
-                //** owner
-                owner: allFormData.ownerDetails,
-            }
-        }
-        let url
-        if (safType == 'bo-edit') {
-            url = api_updateSafDetails
-        } else {
-            url = api_postNewAssessment
-        }
-        console.log('form submit request body ....', requestBody)
-        console.log('...url....', url)
-
-        axios.post(url, requestBody, ApiHeader())
+        // return
+        axios.post(`${api_postNewAssessment}`, requestBody, ApiHeader())
             .then(function (response) {
                 // setloader(false)
                 console.log('response after pushing saf data', response)
@@ -569,10 +535,7 @@ function CitizenPropSafApplicationFormIndex() {
                     toast.success("SAF Successfully Submitted !!")
                     setsafSubmitResponse(response.data)
                     setLoaderStatus(false)
-                    // IF BO EDIT CASE THEN SHOW ONLY CHANGES SAVED
-                    if (safType != 'bo-edit') {
-                        nextFun(7)
-                    }
+                    nextFun(7)
                 } else {
                     notify('Something went wrong in applying', 'error')
                     setLoaderStatus(false)
@@ -590,7 +553,10 @@ function CitizenPropSafApplicationFormIndex() {
 
     ///////////{*** COLLECTING ALL FORM DATA***}/////////
     const collectAllFormData = (key, formData, previewFormData) => {
+        console.log('floor list at collection........', formData)
         //*previewformdata coming empty if floor case
+        console.log('floor preview list at collection........', previewFormData)
+        console.log('prev of all Data', allFormData)
         setAllFormData({ ...allFormData, [key]: formData })
 
         //* storing data to preview
@@ -614,9 +580,10 @@ function CitizenPropSafApplicationFormIndex() {
         setsafTypeCame(safType)
         fetchMasterData()
         fetchULBList()
-        if (safType == 're' || safType == 'mu' || safType == 'bo-edit') {
+        if (safType == 're' || safType == 'mu') {
             fetchPropertyDetails()
         }
+
     }, [])
 
     const fetchMasterData = () => {
@@ -644,32 +611,17 @@ function CitizenPropSafApplicationFormIndex() {
 
 
     const fetchPropertyDetails = () => {
-        setLoaderStatus(true)
 
-        console.log('inside fetchPropertyDetails....', safType)
-        // return
-        let url
-        let requestBody
-        if (safType == 'bo-edit') {
-            url = api_getStaticSafDetails
-            requestBody = {
-                applicationId: safId
-            }
-        } else {
-            url = api_getHoldingDetails
-            requestBody = {
-                propertyId: safId
-            }
+        let requestBody = {
+            propertyId: safId
+            // propertyId: 54 //staic for checking
         }
-
-
         setLoaderStatus(true)
 
         console.log('body before finding prop', requestBody)
-        // return
-        axios.post(url, requestBody, ApiHeader())
+        axios.post(`${api_getHoldingDetails}`, requestBody, ApiHeader())
             .then(function (response) {
-                console.log('getting property detail for re assesment or updation ...', response)
+                console.log('getting property detail for re assesment ...', response)
                 setexistingPropertyDetails(response)
                 setLoaderStatus(false)
             })
@@ -708,9 +660,6 @@ function CitizenPropSafApplicationFormIndex() {
     }
 
     const submitRuelsetData = () => {
-        if (safType == 'bo-edit') {
-            return
-        }
         // return
         // setsubmitButtonStatus(false);
         setLoaderStatus(true);
@@ -776,80 +725,43 @@ function CitizenPropSafApplicationFormIndex() {
     };
 
 
+
     return (
         <>
             <ToastContainer autoClose={2000} position="top-right" />
             {loaderStatus && <CommonLoader />}
-            {/* take a parent div ...style it as displayed below    ,....make it a grid with col-12 */}
-            <div className='w-full grid grid-cols-1 md:grid-cols-12 gap-2 lg:grid-cols-12 px-2 md:p-6 md:px-10 md:space-x-10 '>
 
-                <div className='col-span-12'>
-                    {formHeadStatus && <span className='font-bold text-gray-700  text-2xl font-serif text-center float-center'>You Are Applying For {safType == 'new' && 'New Assessment'}  {safType == 're' && 'Re Assessment'}  {safType == 'mu' && 'Mutation'}</span>}
-
-                    <span onClick={() => setpreviewCloseStatus(!previewCloseStatus)} className='hidden md:flex cursor-pointer px-4 py-1  float-right  justify-center items-center bg-indigo-500 rounded-full shadow-2xl border border-white hover:scale-105 hover:bg-indigo-700'>
-                        {/* {!previewCloseStatus && <HiArrowNarrowRight className="text-white font-semibold" />}
-                        {previewCloseStatus && <HiArrowNarrowLeft className="text-white font-semibold" />} */}
-                       <Tooltip anchorId="preview-form-button" />
-                        <span id="preview-form-button" data-tooltip-content={previewCloseStatus ? 'Click to open form preview' : 'Click to close form preview'} className='text-white'>{previewCloseStatus ? 'Show Preview' : 'Hide Preview'}</span>
-                    </span>
-                </div>
-
-                {/* Rest of the component will go here ....it has a col-span of 9*/}
-                <div className={`${formIndex >= 7 ? 'col-span-12' : (previewCloseStatus ? 'col-span-12' : 'col-span-9')} w-full h-screen overflow-x-hidden`}>
-
-                    {/* your custom content */}
-                    <div className='w-full  text-lg rounded-lg'>
-                        {/* {5>4 && */}
-
-
-                        {safType != 'new' && formHeadStatus &&
+            <div className='text-center font-bold text-gray-700 text-xl border-b-2 border-gray-700 mx-4 mb-4'>
+            Applying For {safType == 'new' && 'New Assessment'}  {safType == 're' && 'Re Assessment'}  {safType == 'mu' && 'Mutation'} <br />
+            {safType != 'new' && formHeadStatus &&
                             <div className='relative font-bold text-gray-700  text-2xl text-center'><span className='text-gray-500'>Holding No.</span> {existingPropertyDetails?.data?.data?.holding_no}</div>}
-                        <div>
-                        </div>
-                        {formIndex < 7 && <div className="flex mt-5 mb-5 md:pr-6">
-                            <FormStatusTimeline active={formIndex == 1 && true} index="1" level="Basic Details" verificationStatus={formIndex >= 2 && true} last={false} />
-                            <FormStatusTimeline active={formIndex == 2 && true} index="2" level="Property Details" verificationStatus={formIndex >= 3 && true} last={false} />
-                            <FormStatusTimeline active={formIndex == 3 && true} index="3" level="Electricity & Water" verificationStatus={formIndex >= 4 && true} last={false} />
-                            <FormStatusTimeline active={formIndex == 4 && true} index="4" level="Owner Details" verificationStatus={formIndex >= 5 && true} last={false} />
-                            <FormStatusTimeline active={formIndex == 5 && true} index="5" level="Floor Details" verificationStatus={formIndex >= 6 && true} last={false} />
-                            {/* <PageNo formIndex={formIndex} /> */}
-                            <FormStatusTimeline active={formIndex == 6 && true} index="6" level="Additional Details" verificationStatus={formIndex >= 7 && true} last={true} />
-                            <PageNo formIndex={formIndex} />
-                        </div>}
-                        {/* <div className='mt-4 mb-2 font-serif font-semibold text-gray-600 w-full px-4'>Form 1 out of 5</div> */}
-                        <div className='grid grid-cols-1 md:grid-cols-8 lg:grid-cols-8 gap-8  py-4  md:-mt-10'>
-                            <div className='col-span-8 ' ref={viewRef}>
-                                {/* <LoaderComponent show={show} /> */}
+            </div>
+            
+
+                <div className="w-full">
+
+                {(formIndex != 7) && <div className='text-xs mb-1 mx-4'>Page No.: {formIndex}/6</div>}
                                 {formIndex < 8 && <>
-                                    <div className={`${animateform1} transition-all relative`}><CitizenPropBasicDetail3 setzoneList={setzoneList} getLocationByUlb={getLocationByUlb} safType={safType} existingPropertyDetails={existingPropertyDetails} ulbList={ulbList} preFormData={preFormData} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex /></div>
-                                    <div className={`${animateform2} transition-all relative`}><CitizenPropPropertyAddressDetails ulbLocation={ulbLocation} safType={safType} existingPropertyDetails={existingPropertyDetails} preFormData={preFormData} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex /></div>
-                                    <div className={`${animateform3} transition-all relative`}><CitizenPropElectricityWaterDetails safType={safType} existingPropertyDetails={existingPropertyDetails} preFormData={preFormData} collectFormDataFun={collectAllFormData} backFun={backFun} nextFun={nextFun} formIndex /></div>
-                                    <div className={`${animateform4} transition-all relative`}><CitizenPropOwnerDetails safType={safType} existingPropertyDetails={existingPropertyDetails} preFormData={preFormData} assType={assTypeText} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex /></div>
-                                    <div className={`${animateform5} transition-all relative`}><CitizenPropFloorDetails safType={safType} existingPropertyDetails={existingPropertyDetails} preFormData={preFormData} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex /></div>
-                                    <div className={`${animateform6} transition-all relative`}><CitizenPropAdditionalDetails submitRuelsetData={submitRuelsetData} zoneValue={zoneValue} setzoneValue={setzoneValue} zoneList={zoneList} getLocationByUlb={getLocationByUlb} safType={safType} existingPropertyDetails={existingPropertyDetails} ulbList={ulbList} preFormData={preFormData} collectFormDataFun={collectAllFormData} allFormData={allFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex /></div>
-                                    {formIndex == 7 && <div className={`${animateform7} transition-all relative`}><SafFormReview safType={safType} zoneValue={zoneValue} rulesetData={rulesetData} formReviewData={allFormPreviewData} collectFormDataFun={collectAllFormData} submitFun={submitButtonToggle} toastFun={notify} backFun={backFun} nextFun={nextFun} /></div>}
+                                    {animateform1 && <CitizenPropBasicDetail3 setzoneList={setzoneList} getLocationByUlb={getLocationByUlb} safType={safType} existingPropertyDetails={existingPropertyDetails} ulbList={ulbList} preFormData={preFormData} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
+                                    {animateform2 && <CitizenPropPropertyAddressDetails ulbLocation={ulbLocation} safType={safType} existingPropertyDetails={existingPropertyDetails} preFormData={preFormData} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
+                                    {animateform3 && <CitizenPropElectricityWaterDetails safType={safType} existingPropertyDetails={existingPropertyDetails} preFormData={preFormData} collectFormDataFun={collectAllFormData} backFun={backFun} nextFun={nextFun} formIndex />}
+                                    {animateform4 && <CitizenPropOwnerDetails safType={safType} existingPropertyDetails={existingPropertyDetails} preFormData={preFormData} assType={assTypeText} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
+                                    {animateform5 && <CitizenPropFloorDetails safType={safType} existingPropertyDetails={existingPropertyDetails} preFormData={preFormData} collectFormDataFun={collectAllFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
+                                    {animateform6 && <CitizenPropAdditionalDetails submitRuelsetData={submitRuelsetData} zoneValue={zoneValue} setzoneValue={setzoneValue} zoneList={zoneList} getLocationByUlb={getLocationByUlb} safType={safType} existingPropertyDetails={existingPropertyDetails} ulbList={ulbList} preFormData={preFormData} collectFormDataFun={collectAllFormData} allFormData={allFormData} toastFun={notify} backFun={backFun} nextFun={nextFun} formIndex />}
+                                    {(formIndex == 7 && animateform7) && <SafFormReview safType={safType} zoneValue={zoneValue} rulesetData={rulesetData} formReviewData={allFormPreviewData} collectFormDataFun={collectAllFormData} submitFun={submitButtonToggle} toastFun={notify} backFun={backFun} nextFun={nextFun} />}
                                 </>}
+                </div>
+                               
+
                                 {/*//> after successfully form submit show safformdemand page */}
-                                {formIndex == 8 && <div className={`${animateform8} transition-all relative`}><SafFormDemand toastFun={notify} backFun={backFun} nextFun={nextFun} safSubmitResponse={safSubmitResponse} showLoader={showLoader} /></div>}
-                                {formIndex == 9 && <div className={`${animateform8} transition-all relative`}>
+                                {(formIndex == 8 && animateform8) && <SafFormDemand toastFun={notify} backFun={backFun} nextFun={nextFun} safSubmitResponse={safSubmitResponse} showLoader={showLoader} />}
+                                {(formIndex == 9 && animateform9) && 
                                     <div>
                                         <div>Changes Saved Successfully !</div>
                                         <button type="button" className="px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs leading-tight  rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out">Back to Workflow</button>
                                     </div>
-                                </div>}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* FeedBack Screen*/}
-                {formIndex < 7 && <div className={`transition-all ${previewCloseStatus ? 'col-span-0 hidden' : 'col-span-3 block'} w-full h-screen  rounded-lg p-2 overflow-auto`}>
-                    <div className=''>
-                        <PropFeedbackScreen formIndex={formIndex} verificationStatus={formIndex} allFormData={allFormPreviewData} assTypeText={assTypeText} />
-                    </div>
-                </div>}
-
-            </div>
+                                }
+                            
         </>
     )
 }

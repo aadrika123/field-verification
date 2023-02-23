@@ -9,7 +9,7 @@ export default function CitizenApplyApiList() {
         //3
         api_getMasterData: `${baseUrl}/api/property/saf/master-saf`,
         //4
-        api_postNewAssissment: `${baseUrl}/api/property/saf/apply`,
+        api_postNewAssessment: `${baseUrl}/api/property/saf/apply`,
         //5
         api_getProfileDetails: `${baseUrl}/api/my-profile-details`,
         //6
@@ -23,6 +23,19 @@ export default function CitizenApplyApiList() {
         //8
         api_getSafDetailsById2: `${baseUrl}/api/property/saf-details`,
         //9
+        get_ObjectionDetailsById: `${baseUrl}/api/property/objection/details`,
+        api_getHoldingDemandById: `${baseUrl}/api/property/get-holding-dues`,
+        api_wardByUlb: `${baseUrl}/api/workflow/getWardByUlb`,
+        api_newWardByOldWard: `${baseUrl}/api/get-newward-by-oldward`,
+        api_zoneByUlb: `${baseUrl}/api/property/get-zone-byUlb`,
+        api_citizenRegister2: `${baseUrl}/api/citizen-register`,
+        api_citizenLogin2: `${baseUrl}/api/citizen-login`,
+        api_reviewCalculation: `${baseUrl}/api/property/review-calculation`,
+        api_updateSafDetails: `${baseUrl}/api/property/saf/edit`,
+        api_tcComparisionList: `${baseUrl}/api/property/saf/IndiVerificationsList`,
+        api_getSpecificHoldingTranscationHistory: `${baseUrl}/api/property/prop-payment-history`,
+        api_getHoldingReceiptUrl: `${baseUrl}/api/property/prop-payment-receipt`,
+        api_postPropertyPayment: `${baseUrl}/api/property/payment-holding`,
        
 
         //application list by module

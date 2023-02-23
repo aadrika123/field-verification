@@ -159,9 +159,6 @@ const VerifyIndex = (props) => {
 
             {(pageNo == 5 && !loader) && <Preview next={() => submitFun()} back={() => backFun(5)} allData={allFormData} applicationData={props?.applicationData} wardList={wardList} propertyList={propertyType} roadList={roadList} usageList={usageType} occupancyList={occupancyType} constructionList={constructionList} floorList={floorList} /> }
 
-            {/* {pageNo == 6 && <GeoIndex applicationData={props?.applicationData} />} */}
-
-
         </div>
     
     </>
