@@ -114,7 +114,7 @@ function CitizenPropOwnerDetails(props) {
         if (props?.safType == 're' || props?.safType == 'mu') {
             feedPropertyData()
         }
-        setownerPreviewList(props?.prevData)
+        // setownerPreviewList(props?.prevData)
     }, [props?.existingPropertyDetails])
 
     console.log('existing property details...', props?.existingPropertyDetails?.data?.data)
@@ -368,7 +368,7 @@ function CitizenPropOwnerDetails(props) {
         }
 
     }
-    console.log('owner preview list...', ownerPreviewList)
+    // console.log('owner preview list...', ownerPreviewList)
     
     return (
         <>

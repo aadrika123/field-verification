@@ -105,7 +105,7 @@ const TopBar = () => {
                 
                 <span>    <img src={logo1} alt="" className='w-10 inline mr-2'/></span>
 
-              <span className='text-white'>RMC</span>
+              <span className='text-white'>UD&HD</span>
 
             </h2>
 
@@ -139,7 +139,7 @@ const TopBar = () => {
                   <span  onClick={() => {
                     setnavToggle(false)
                     navigate('/dashboard')
-                  }} className='text-indigo-600'>RMC</span>
+                  }} className='text-indigo-600'>UD&HD</span>
 
             </h2>
             </span>
@@ -352,7 +352,7 @@ const TopBar = () => {
             <h2 class="text-2xl font-semibold px-4 overflow-hidden cursor-pointer">
              {/* image */}
               <span>    <img src={logo1} alt="" className='w-10 inline mr-2'/></span>
-              <span className='text-white'>RMC</span>
+              <span className='text-white'>UD&HD</span>
             </h2>
           </span>
 

@@ -239,7 +239,7 @@ function CitizenPropBasicDetail3(props) {
                                 <span className='col-span-12'>
                                     <select id='basic_details_1' {...formik.getFieldProps('ulbId')} value={formik.values.ulbId} className='bg-white px-2 py-1 w-full rounded-sm shadow-md border-[1px] border-gray-400 cursor-pointer'>
                                     <option value="" disabled selected>select ULB</option>
-                                    <option value="2" selected>Ranchi Nagar Nigam</option>
+                                    <option value="2" >Ranchi Nagar Nigam</option>
                                     {/* {
                                             props?.ulbList?.map((data) => (
                                                 <option value={data.id}>{data.ulb_name}</option>

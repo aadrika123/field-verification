@@ -30,7 +30,7 @@ const Preview = (props) => {
                 <div onClick={props?.back} className='px-4 py-1.5 text-sm text-white rounded-sm shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 cursor-pointer'>
                     Back
                 </div>
-            <button onClick={props?.next} className="px-4 py-1.5 mr-4 text-sm text-white rounded-sm shadow-md bg-green-500 hover:bg-green-600 focus:bg-green-600">Submit & Next</button>
+            <button onClick={props?.next} className="px-4 py-1.5 mr-4 text-sm text-white rounded-sm shadow-md bg-green-500 hover:bg-green-600 focus:bg-green-600">Submit</button>
             </div>
 
     </>

@@ -119,6 +119,10 @@ export default function ProjectApiList() {
 
         api_changePassword : `${baseUrl}/api/change-password`,
 
+        //forward api 
+        api_postApplicationToLevel: `${baseUrl}/api/property/saf/post/level`,
+        
+
 
           ///////{*******ADVERTISEMENT API LIST********}////////
           

@@ -13,6 +13,8 @@ import * as yup from 'yup'
 import Modal from 'react-modal'
 import {FcCamera} from 'react-icons/fc'
 import {ImCross} from 'react-icons/im'
+import SubmissionScreen from '../../Common/SubmissionScreen';
+import ForwardScreen from './ForwardScreen';
 
 const GeoIndex = () => {
 
@@ -56,15 +58,20 @@ const GeoIndex = () => {
     const [frontUrl, setfrontUrl] = useState(null)
     const [frontData, setfrontData] = useState()
     const [frontCamera, setfrontCamera] = useState(false)
+
     const [rightImageUpload, setrightImageUpload] = useState()
     const [rightUrl, setrightUrl] = useState(null)
     const [rightData, setrightData] = useState()
     const [rightCamera, setrightCamera] = useState(false)
+
     const [leftImageUpload, setleftImageUpload] = useState()
     const [leftUrl, setleftUrl] = useState(null)
     const [leftData, setleftData] = useState()
     const [leftCamera, setleftCamera] = useState(false)
+
     const [imageNo, setimageNo] = useState(0)
+    const [submitStatus, setsubmitStatus] = useState(false)
+    const [forwardStatus, setforwardStatus] = useState(false)
 
     const [loader, setloader] = useState(false)
 
@@ -128,7 +135,8 @@ const GeoIndex = () => {
                 // props?.next('true')
                 setloader(false)
                 toast.success('Document Uploaded Successfully !!!')
-                navigate('/search/property')
+                // navigate('/search/property')
+                setsubmitStatus(true)
             }
             if(res?.data?.status == false){
                 console.log("error images", res)
@@ -277,7 +285,7 @@ const GeoIndex = () => {
             setfrontData(geoLocation)
             setfrontImageUpload(e.target.files[0]);
             setfrontUrl(URL.createObjectURL(e.target.files[0]))
-            formik.setFieldValue('frontImage', frontImageUpload)
+            // formik.setFieldValue('frontImage', frontImageUpload)
             formik.setFieldTouched('flongitude', frontData?.longitude)
             formik.setFieldValue('flatitude', frontData?.latitude)
             console.log("--1-- name file on change..", file);
@@ -291,7 +299,7 @@ const GeoIndex = () => {
             setrightData(geoLocation)
             setrightImageUpload(e.target.files[0]);
             setrightUrl(URL.createObjectURL(e.target.files[0]))
-            formik.setFieldValue('rightImage', rightImageUpload)
+            // formik.setFieldValue('rightImage', rightImageUpload)
             formik.setFieldValue('rlongitude', rightData?.longitude)
             formik.setFieldValue('rlatitude', rightData?.latitude)
             console.log("--2-- name file on change..", file);
@@ -305,7 +313,7 @@ const GeoIndex = () => {
             setleftData(geoLocation)
             setleftImageUpload(e.target.files[0]);
             setleftUrl(URL.createObjectURL(e.target.files[0]))
-            formik.setFieldValue('leftImage', leftImageUpload)
+            // formik.setFieldValue('leftImage', leftImageUpload)
             formik.setFieldValue('llongitude', leftData?.longitude)
             formik.setFieldValue('llatitude', leftData?.latitude)
             console.log("--3-- name file on change..", file);
@@ -355,6 +363,9 @@ const GeoIndex = () => {
 
     <ToastContainer position="top-right" autoClose={2000} />
 
+    <SubmissionScreen heading={'Field Verification'} type='saf' process='geoTagging' appNo={applicationData?.saf_no} openSubmit={submitStatus} id={id} navigation={() => navigate('/search/property')} forward={() => setforwardStatus(true)}/>
+    <ForwardScreen openScreen={forwardStatus} id={id} navigation={() => navigate('/search/property')} />
+
     <div className='w-full'>
             <h1 className=' text-center font-bold text-xl border-b-2 border-gray-700 mx-4'>Field Verification <br />
             Document Upload </h1>
@@ -365,7 +376,7 @@ const GeoIndex = () => {
                 <span className="grid grid-cols-12 w-full text-sm  gap-2 my-1"><span className='col-span-6'>Apply Date:</span> <span className="font-semibold text-base col-span-6">{applicationData?.application_date}</span></span>
             </div>
     
-    {!loader && <form className='border-2 border-blue-700 bg-blue-50 mb-4' onChange={formik.onChange} onSubmit={formik.handleSubmit} >
+    {!loader && <form className='border-2 border-blue-700 bg-blue-50 mb-4' onChange={formik.handleChange} onSubmit={formik.handleSubmit} >
                 <h1 className='text-center font-semibold bg-blue-700 text-white uppercase text-lg'>Upload Image</h1>
 
             {/* =====Front======== */}

@@ -89,7 +89,7 @@ const Login = () => {
     
     <div className='flex flex-row flex-wrap gap-2 items-center'>
     <img src={logo1} alt="" className='w-16'/>
-    <div className='text-2xl uppercase tracking-wide font-semibold'>Ranchi Municipal <br /> Corporation</div>
+    <div className='text-xl uppercase tracking-wide font-semibold'>Urban Development & <br /> Housing Department</div>
     </div>
 
     <hr />

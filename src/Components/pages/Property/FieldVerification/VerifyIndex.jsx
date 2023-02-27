@@ -14,6 +14,8 @@ import ExtraDetails from './ExtraDetails'
 import { toast, ToastContainer } from 'react-toastify'
 import { useLocation, useNavigate } from 'react-router-dom'
 import GeoIndex from '../GeoTagging/GeoIndex'
+import SubmissionScreen from '../../Common/SubmissionScreen'
+import ForwardScreen from '../GeoTagging/ForwardScreen'
 
 const VerifyIndex = (props) => {
 
@@ -27,6 +29,8 @@ const VerifyIndex = (props) => {
     const [roadList, setroadList] = useState()
     const [floorList, setfloorList] = useState()
     const [constructionList, setconstructionList] = useState()
+    const [submitStatus, setsubmitStatus] = useState(false)
+    const [forwardStatus, setforwardStatus] = useState(false)
 
     const [basicDetails, setbasicDetails] = useState()
     const [extraDetails, setextraDetails] = useState()
@@ -119,8 +123,9 @@ const VerifyIndex = (props) => {
       console.log("success => ", res)
       toast.success('Data Submitted Successfully !!!')
       setloader(false)
-      navigate('/geoTagging/' + props?.applicationData?.id)
+      // navigate('/geoTagging/' + props?.applicationData?.id)
       // props.page(5)
+      setsubmitStatus(true)
     }
     if(res?.data?.status == false){
       console.log("error => ", res)
@@ -144,6 +149,10 @@ const VerifyIndex = (props) => {
     {loader && <CommonLoader />}
 
     <ToastContainer position="top-right" autoClose={2000} />
+
+    <SubmissionScreen heading={'Field Verification'} type='saf' process='verify' appNo={props?.applicationData?.saf_no} openSubmit={submitStatus} id={props?.applicationData?.id} navigation={() => navigate('/search/property')} forward={() => setforwardStatus(true)}/>
+
+    <ForwardScreen openScreen={forwardStatus} id={props?.applicationData?.id} navigation={() => navigate('/search/property')} />
     
         <div className='w-full'>
 

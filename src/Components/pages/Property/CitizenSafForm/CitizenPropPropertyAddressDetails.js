@@ -118,9 +118,6 @@ function CitizenPropPropertyAddressDetails(props) {
         setLocationByUlb()
     }, [props?.ulbLocation])
 
-    
-    
-
     const setLocationByUlb = () => {
         console.log('inside location in address...', props?.ulbLocation)
         formik.setFieldValue('city', props?.ulbLocation?.city_name)
