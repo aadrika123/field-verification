@@ -41,10 +41,10 @@ function LandingDashboardNew() {
         <contextDash.Provider value={contextData}>
         
             {/* =========CONTAINER================= */}
-             <div className='grid grid-cols-12 mt-4 md:mt-4 bg-white poppins animate__animated animate__fadeIn animate__faster select-none'>
+             <div className=' grid grid-cols-12 mt-4 md:mt-4 bg-white poppins animate__animated animate__fadeIn animate__faster select-none'>
                 
             {/* ========(MAIN SECTION)================ */}
-             <div className='px-6 col-span-12  overflow-y-auto pb-2'>
+             <div className=' px-6 col-span-12  overflow-y-auto pb-2'>
 
                 {/* ===========HEADING================= */}
                   <div className='text-xl 2xl:text-3xl font-semibold text-gray-700 text-center font-serif mt-0 poppins mb-10'>All Municipal Services at your FingerTip</div>

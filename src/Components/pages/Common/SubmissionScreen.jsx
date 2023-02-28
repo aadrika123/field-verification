@@ -29,9 +29,17 @@ const SubmissionScreen = (props) => {
     props.forward()
   }
 
+  const role = localStorage.getItem('roles')
+
+//   useEffect(() => {
+//     if(props?.openSubmit == true){
+//       role == '["ULB Tax Collector"]' && props.forward()  
+//     }
+    
+//   },[props?.openSubmit])
+
   const navigate = useNavigate()
 
-  const role = localStorage.getItem('roles')
 //   console.log('roles => ', role)
 
   return (
@@ -43,9 +51,9 @@ const SubmissionScreen = (props) => {
         contentLabel="Example Modal"
       >
         <div class=" rounded-lg shadow-lg shadow-indigo-300 md:w-[50vw] md:h-max w-full relative border-2 border-indigo-500 bg-gray-50 px-2 m-2 py-4 h-max border-t-2 border-l-2 overflow-auto">
-        <div className="absolute top-2 z-10 bg-red-200 hover:bg-red-300 right-2 rounded-full p-2 cursor-pointer" onClick={() => closeAction()}>
+        {(props?.process == 'verify' && role == '["Tax Collector"]') && <div className="absolute top-2 z-10 bg-red-200 hover:bg-red-300 right-2 rounded-full p-2 cursor-pointer" onClick={() => closeAction()}>
                     <ImCross fontSize={10}/>
-                </div>
+                </div>}
 
           <div className="poppins text-xl font-semibold w-full pt-6 md:px-8 px-2">
             <div className="bg-indigo-600 font-semibold rounded-sm w-full 2xl:text-2xl text-lg text-center shadow-sm text-white px-4 py-2 poppins uppercase">
@@ -70,7 +78,7 @@ const SubmissionScreen = (props) => {
             </div>
 
             <div className="flex items-center justify-between my-6">
-                <button className="2xl:px-6 px-3 py-1.5 2xl:py-2.5 cursor-pointer bg-indigo-500 text-white font-medium text-xs  poppins rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out" onClick={() => closeAction()}>Close</button>
+            {(props?.process == 'verify' && role == '["Tax Collector"]') && <button className="2xl:px-6 px-3 py-1.5 2xl:py-2.5 cursor-pointer bg-indigo-500 text-white font-medium text-xs  poppins rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out" onClick={() => closeAction()}>Close</button>}
                 {(props?.process == 'verify' && role == '["Tax Collector"]') && <button className="2xl:px-6 px-3 py-1.5 2xl:py-2.5 cursor-pointer bg-green-500 text-white font-medium text-xs  poppins rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out" onClick={() => navigate('/geoTagging/' + props?.id)}>Proceed to Geo-Tagging</button>}
                 {(props?.process == 'geoTagging' && role == '["Tax Collector"]') && <button className="2xl:px-6 px-3 py-1.5 2xl:py-2.5 cursor-pointer bg-green-500 text-white font-medium text-xs  poppins rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out" onClick={() => forwardAction()}>Forward Application</button>}
                 {(props?.process == 'verify' && role == '["ULB Tax Collector"]') && <button className="2xl:px-6 px-3 py-1.5 2xl:py-2.5 cursor-pointer bg-green-500 text-white font-medium text-xs  poppins rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-lg transition duration-150 ease-in-out" onClick={() => forwardAction()}>Forward Application</button>}

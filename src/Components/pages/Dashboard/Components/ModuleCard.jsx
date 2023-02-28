@@ -32,7 +32,7 @@ const ModuleCard = (props) => {
   // =============CSS STYLE VARIABLES==============
   let cardStyle = 'md:w-max w-full rounded-tl-md rounded-br-md hover:scale-105 transition-all duration-300  shadow-md text-sm bg-indigo-50 flex flex-row hover:shadow-lg shadow-indigo-200 hover:shadow-indigo-200'
 
-  let buttonStyle = 'z-[999] px-2 py-1 text-xs 2xl:text-sm rounded-md hover:shadow-md bg-indigo-500 hover:bg-indigo-600 text-white cursor-pointer poppins'
+  let buttonStyle = ' px-2 py-1 text-xs 2xl:text-sm rounded-md hover:shadow-md bg-indigo-500 hover:bg-indigo-600 text-white cursor-pointer poppins'
 
   return (
     <>

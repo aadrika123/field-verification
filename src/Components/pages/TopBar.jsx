@@ -86,10 +86,10 @@ const TopBar = () => {
   return (
     <>
     
-      <header className='block select-none md:mb-16 mb-16'>
+      <header className='block select-none md:mb-16 mb-16 '>
 
 {/* =======navbar======== */}
-          <nav className='nav-top flex flex-nowrap lg:flex-start items-center z-20 fixed top-0 left-0 right-0 bg-indigo-600 bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-500 overflow-y-auto  lg:overflow-visible'>
+          <nav className='nav-top flex flex-nowrap lg:flex-start items-center z-10 fixed top-0 left-0 right-0 bg-indigo-600 bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-500 overflow-y-auto  lg:overflow-visible'>
             <div class="container mx-auto px-4 xl:max-w-6xl ">
 
 {/* ========mobile navigation========= */}
@@ -111,14 +111,14 @@ const TopBar = () => {
 
             </span>
 
-            <div class="right-0 flex items-center cursor-pointer text-2xl z-10 text-white font-bold" onClick={() => setnavToggle(!navToggle)}>
+            <div class="right-0 flex items-center cursor-pointer text-2xl text-white font-bold" onClick={() => setnavToggle(!navToggle)}>
             <GoThreeBars fontSize='large'/>
             </div>
 
             </div>
 
             {/* ======Mobile Menu========== */}
-            {navToggle && <div class="lg:hidden fixed w-full h-full inset-0 z-40" id="mobile-menu">
+            {navToggle && <div class="lg:hidden fixed w-full h-full inset-0 z-0" id="mobile-menu">
             <span class="fixed bg-gray-900 bg-opacity-70 w-full h-full inset-x-0 top-0"></span>
 
             <nav id="mobile-nav" class="flex flex-col ltr:right-0 rtl:left-0 w-64 fixed top-0 py-4 bg-white text-gray-700 h-full overflow-auto z-40">

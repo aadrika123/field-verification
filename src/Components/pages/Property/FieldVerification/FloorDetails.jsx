@@ -16,7 +16,7 @@ const FloorDetails = (props) => {
     const [floorPreviewForm, setfloorPreviewForm] = useState()
     const [editStatus, setEditStatus] = useState(false) //to check edit or add of form
     const [editIndex, setEditIndex] = useState() //to carry the index to edit if edistatus is true
-    const [AddFloorForm, setAddFloorForm] = useState('-translate-y-full -top-[400px]')
+    const [AddFloorForm, setAddFloorForm] = useState('translate-y-0 top-[100px]')
     const notify = ''
 
     const floorNoRef = useRef(null);
@@ -78,38 +78,38 @@ const FloorDetails = (props) => {
 
             feedPropertyData()
        
-    }, [props?.data])
+    }, [props?.preData])
 
-    console.log('existing property details...', props?.existingPropertyDetails?.data?.data)
+    // console.log('existing property details...', props?.existingPropertyDetails?.data?.data)
 
     const feedPropertyData = () => {
         console.log('inside feed floor dat..')
         //* making matching floor key to ajust in existing code since key coming is different
-        if (props?.data.length != 0) {
+        if (props?.preData.length != 0) {
             console.log('inside lenght >0..')
 
-            let floorsMake = props?.data.map((owner) => {
+            let floorsMake = props?.preData.map((owner) => {
                 return {
-                    floorNo: owner?.floor_mstr_id,
-                    useType: owner?.usage_type_mstr_id,
-                    occupancyType: owner?.occupancy_type_mstr_id,
-                    constructionType: owner?.const_type_mstr_id,
-                    buildupArea: owner?.builtup_area,
-                    dateFrom: owner?.date_from,
-                    dateUpto: owner?.date_upto,
+                    floorNo: owner?.floorNo,
+                    useType: owner?.useType,
+                    occupancyType: owner?.occupancyType,
+                    constructionType: owner?.constructionType,
+                    buildupArea: owner?.buildupArea,
+                    dateFrom: owner?.dateFrom,
+                    dateUpto: owner?.dateUpto,
 
                 }
             })
 
-            let previewFloorsMake = props?.data.map((owner) => {
+            let previewFloorsMake = props?.preData.map((owner) => {
                 return {
-                    floorNo: owner?.floor_name,
-                    useType: owner?.usage_type,
-                    occupancyType: owner?.occupancy_type,
-                    constructionType: owner?.construction_type,
-                    buildupArea: owner?.builtup_area,
-                    dateFrom: owner?.date_from,
-                    dateUpto: owner?.date_upto,
+                    floorNo: owner?.floorNo,
+                    useType: owner?.useType,
+                    occupancyType: owner?.occupancyType,
+                    constructionType: owner?.constructionType,
+                    buildupArea: owner?.buildupArea,
+                    dateFrom: owner?.dateFrom,
+                    dateUpto: owner?.dateUpto,
 
                 }
             })
@@ -195,13 +195,13 @@ const FloorDetails = (props) => {
         toggleForm()
     }
     const checkMinimumFloor = () => {
-        if (floorList.length === 0) {
-            notify('Add minimum one floor', 'warn')
-        } else {
+        // if (floorList.length === 0) {
+        //     notify('Add minimum one floor', 'warn')
+        // } else {
             console.log('inside checkmin floor')
-            props.collectData('floor',floorList)
+            props.collectData('addFloor',floorList)
             props.next()
-        }
+        // }
     }
 
     const handleChange = (e) => {
@@ -295,9 +295,14 @@ const FloorDetails = (props) => {
                                         <span className="text-red-600 absolute text-xs">{formik.touched.buildupArea && formik.errors.buildupArea ? formik.errors.buildupArea : null}</span>
                                     </div>
                                     <div className="form-group col-span-12 mb-3 md:px-4">
-                                        <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">From Date<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
+                                        <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold"> Date From<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
                                         <input {...formik.getFieldProps('dateFrom')} type="date" className="cypress_construction_date_from form-control block w-full px-3 py-1.5 text-sm  font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none cursor-pointer shadow-md" placeholder='Enter dateFrom no' />
                                         <span className="text-red-600 absolute text-xs">{formik.touched.dateFrom && formik.errors.dateFrom ? formik.errors.dateFrom : null}</span>
+                                    </div>
+                                    <div className="form-group col-span-12 mb-3 md:px-4">
+                                        <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold"> Date Upto<small className="mt-1 text-sm font-semibold text-red-600 inline ">*</small></label>
+                                        <input {...formik.getFieldProps('dateUpto')} type="date" className="cypress_construction_date_from form-control block w-full px-3 py-1.5 text-sm  font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none cursor-pointer shadow-md" placeholder='Enter dateFrom no' />
+                                        <span className="text-red-600 absolute text-xs">{formik.touched.dateUpto && formik.errors.dateUpto ? formik.errors.dateUpto : null}</span>
                                     </div>
 
                                     <div className="col-span-12 text-center mt-4">
@@ -312,15 +317,21 @@ const FloorDetails = (props) => {
                 <div className={` w-full md:py-4 md:px-0 md:pb-0 md:pt-0  md:w-full mx-auto overflow-x-auto`}>
                 <div className='border-2 border-blue-700 bg-blue-50 mb-4'>
                 <h1 className='text-center font-semibold bg-blue-700 text-white uppercase text-lg'>
-                    <span>Floor Details</span>
+                    <span>Add Floor</span>
                 </h1>
                             {
-                                floorPreviewList?.map((data, index) => (
+                                floorList?.map((data, index) => (
                                     <>
 
             <div className={`${AddFloorForm == 'translate-y-0 top-[100px]' ? 'hidden' : 'block'} bg-indigo-50 border-2 border-indigo-500 my-2 mx-1`}>
                 <div className='text-white bg-indigo-500 px-2 font-semibold flex flex-row justify-between items-center'>
-                    <span>{data?.floorNo}</span>
+                    <span>
+                        {/* {data?.floorNo} */}
+                    {
+                          props?.floorList?.map((elem) => <>
+                            {elem?.id == data.floorNo && elem?.floor_name}
+                          </>)
+                        }</span>
                 <span className='flex gap-2 py-1'>
                         <button className='text-xs font-normal px-2 py-1 rounded-sm bg-green-500 hover:bg-green-600 focus:bg-green-600' onClick={() => editFloor(index)}>Edit</button>
                         <button className='text-xs font-normal px-2 py-1 rounded-sm bg-red-500 hover:bg-red-600 focus:bg-red-600' onClick={() => removeFloor(index)}>Delete</button>
@@ -329,15 +340,36 @@ const FloorDetails = (props) => {
                 <div className='px-2 py-2'>
                     <div className="grid grid-cols-12 text-sm pb-2">
                         <span className=' col-span-6 font-semibold'>Usage Type</span>
-                        <span className='col-span-6'>{data?.useType == '' ? 'N/A' : data?.useType}</span>
+                        <span className='col-span-6'>
+                            {/* {data?.useType == '' ? 'N/A' : data?.useType} */}
+                            {
+                          props?.usageList?.map((elem) => <>
+                            {elem?.id == data.useType && elem?.usage_type}
+                          </>)
+                        }
+                            </span>
                     </div>
                     <div className="grid grid-cols-12 text-sm pb-2">
                         <span className=' col-span-6 font-semibold'>Occupancy Type</span>
-                        <span className='col-span-6'>{data?.occupancyType == '' ? 'N/A' : data?.occupancyType}</span>
+                        <span className='col-span-6'>
+                            {/* {data?.occupancyType == '' ? 'N/A' : data?.occupancyType} */}
+                            {
+                          props?.occupancyList?.map((elem) => <>
+                            {elem?.id == data.occupancyType && elem?.occupancy_type}
+                          </>)
+                        }
+                        </span>
                     </div>
                     <div className="grid grid-cols-12 text-sm pb-2">
                         <span className=' col-span-6 font-semibold'>Construction Type</span>
-                        <span className='col-span-6'>{data?.constructionType == '' ? 'N/A' : data?.constructionType}</span>
+                        <span className='col-span-6'>
+                            {/* {data?.constructionType == '' ? 'N/A' : data?.constructionType} */}
+                            {
+                          props?.constructionList?.map((elem) => <>
+                            {elem?.id == data.constructionType && elem?.construction_type}
+                          </>)
+                        }
+                        </span>
                     </div>
                     <div className="grid grid-cols-12 text-sm pb-2">
                         <span className=' col-span-6 font-semibold'>Built Up Area (in Sq. Ft.)</span>
@@ -346,6 +378,10 @@ const FloorDetails = (props) => {
                     <div className="grid grid-cols-12 text-sm pb-2">
                         <span className=' col-span-6 font-semibold'>Date From</span>
                         <span className='col-span-6'>{data?.dateFrom == '' ? 'N/A' : data?.dateFrom}</span>
+                    </div>
+                    <div className="grid grid-cols-12 text-sm pb-2">
+                        <span className=' col-span-6 font-semibold'>Date Upto</span>
+                        <span className='col-span-6'>{data?.dateUpto == '' ? 'N/A' : data?.dateUpto}</span>
                     </div>
                     
                 </div>

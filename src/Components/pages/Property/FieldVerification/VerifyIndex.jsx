@@ -15,7 +15,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import { useLocation, useNavigate } from 'react-router-dom'
 import GeoIndex from '../GeoTagging/GeoIndex'
 import SubmissionScreen from '../../Common/SubmissionScreen'
-import ForwardScreen from '../GeoTagging/ForwardScreen'
+import ForwardScreen from '../../Common/ForwardScreen'
 
 const VerifyIndex = (props) => {
 
@@ -38,6 +38,7 @@ const VerifyIndex = (props) => {
     const [floorDetails, setfloorDetails] = useState()
     const [allData, setallData] = useState()
     const [allFormData, setallFormData] = useState()
+    const [updatedData, setupdatedData] = useState()
 
     const [pageNo, setpageNo] = useState(1)
 
@@ -70,7 +71,7 @@ const VerifyIndex = (props) => {
 
   const nextFun = (val) => {
     setpageNo(val+1)
-    // val == 5 && props.page(val)
+    // val == 4 && mergeFloorFun()
   }
 
   const backFun = (val) => {
@@ -81,6 +82,16 @@ const VerifyIndex = (props) => {
     console.log('prev of all Data', allFormData)
     setallFormData({ ...allFormData, [key]: formData })
 }
+
+// const mergeFloorFun = () => {
+//   const mergedArray = allFormData.floor.concat(allFormData.addFloor);
+// setupdatedData( {
+//     ...allFormData,
+//     floor: mergedArray,
+//   });
+// }
+
+console.log('merged data => ', allFormData?.floor?.concat(allFormData?.addFloor))
 
   const submitFun = () => {
 
@@ -112,7 +123,7 @@ const VerifyIndex = (props) => {
         dateFrom : allFormData?.extra?.petrolCompletion
       },
       isWaterHarvesting : allFormData?.extra?.waterHarvesting == 'true' ? 1 : 0,
-      floor : allFormData?.floor
+      floor : allFormData?.floor?.concat(allFormData?.addFloor)
     }
 
     console.log('request body => ', body)
@@ -141,7 +152,11 @@ const VerifyIndex = (props) => {
 
   }
 
+  console.log('pre data => ', allFormData)
+
   const location = useLocation()
+
+  const role = localStorage.getItem('roles')
 
   return (
     <>
@@ -152,7 +167,7 @@ const VerifyIndex = (props) => {
 
     <SubmissionScreen heading={'Field Verification'} type='saf' process='verify' appNo={props?.applicationData?.saf_no} openSubmit={submitStatus} id={props?.applicationData?.id} navigation={() => navigate('/search/property')} forward={() => setforwardStatus(true)}/>
 
-    <ForwardScreen openScreen={forwardStatus} id={props?.applicationData?.id} navigation={() => navigate('/search/property')} />
+    <ForwardScreen openScreen={forwardStatus} id={props?.applicationData?.id} />
     
         <div className='w-full'>
 
@@ -160,7 +175,7 @@ const VerifyIndex = (props) => {
 
             {pageNo == 1 && <BasicDetails applicationData={props?.applicationData} wardList={wardList} propertyType={propertyType} roadList={roadList} next={() => nextFun(1)} collectData={collectDataFun} preData={allFormData?.basic} />}
 
-            {pageNo == 2 && <FloorIndex applicationData={props?.applicationData?.floors} usageType={usageType} occupancyType={occupancyType} constructionList={constructionList} floorList={floorList} next={() => nextFun(2)} back={() => backFun(2)} collectData={collectDataFun} preData={allFormData?.floor} />}
+            {pageNo == 2 && <FloorIndex applicationData={props?.applicationData?.floors} usageType={usageType} occupancyType={occupancyType} constructionList={constructionList} floorList={floorList} next={() => nextFun(2)} back={() => backFun(2)} collectData={collectDataFun} preData={allFormData} />}
 
             {pageNo == 3 && <ExtraDetails applicationData={props?.applicationData} next={() => nextFun(3)} back={() => backFun(3)} collectData={collectDataFun} preData={allFormData?.extra}  />}
 

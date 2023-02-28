@@ -14,7 +14,7 @@ import Modal from 'react-modal'
 import {FcCamera} from 'react-icons/fc'
 import {ImCross} from 'react-icons/im'
 import SubmissionScreen from '../../Common/SubmissionScreen';
-import ForwardScreen from './ForwardScreen';
+import ForwardScreen from '../../Common/ForwardScreen';
 
 const GeoIndex = () => {
 

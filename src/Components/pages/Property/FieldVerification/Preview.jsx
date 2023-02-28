@@ -10,10 +10,10 @@ const Preview = (props) => {
   return (
     <>
 
-    <div>
+    <div className='animate__animated animate__fadeInRight animate__faster'>
 
         <BasicPreview data={props?.allData?.basic} applicationData={props?.applicationData} wardList={props?.wardList} propertyList={props?.propertyList} roadList={props?.roadList} />
-        <FloorPreview data={props?.allData?.floor} applicationData={props?.applicationData} usageList={props?.usageList} occupancyList={props?.occupancyList} constructionList={props?.constructionList} floorList={props?.floorList} />
+        <FloorPreview data={props?.allData?.floor} addFloor={props?.allData?.addFloor} applicationData={props?.applicationData} usageList={props?.usageList} occupancyList={props?.occupancyList} constructionList={props?.constructionList} floorList={props?.floorList} />
         <ExtraPreview data={props?.allData?.extra} applicationData={props?.applicationData} />
         
         <div className='border-2 border-blue-700 bg-blue-50 mb-4'>

@@ -21,7 +21,7 @@ const Remarks = (props) => {
   return (
     <>
     
-    <form className='border-2 border-blue-700 bg-blue-50 mb-4' onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
+    <form className='border-2 border-blue-700 bg-blue-50 mb-4 animate__animated animate__fadeInRight animate__faster' onChange={formik.handleChange} onSubmit={formik.handleSubmit}>
                 <h1 className='text-center font-semibold bg-blue-700 text-white uppercase text-lg'>Remarks</h1>
             <div className='bg-indigo-50 border-2 border-indigo-500 my-2 mx-1'>
                 <textarea name="remarks" value={formik.values.remarks} id="" rows="3" className='w-full px-2 py-1' placeholder='Enter your remarks here...'></textarea>

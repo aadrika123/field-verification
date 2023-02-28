@@ -1,4 +1,6 @@
-
+#mobile-menu{
+  z-index: 999 !important;
+}
   
   .fc a[data-navlink] {
     cursor: pointer;

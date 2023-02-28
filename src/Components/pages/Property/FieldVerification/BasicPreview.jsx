@@ -6,7 +6,7 @@ const BasicPreview = (props) => {
     <>
     
     {/* =======Basic Details============== */}
-    <div className='border-2 border-blue-700 bg-blue-50 mb-4' >
+    <div className='border-2 border-blue-700 bg-blue-50 mb-4 ' >
                 <h1 className='text-center font-semibold bg-blue-700 text-white uppercase text-lg'>Basic Detatils (Preview)</h1>
 
                 {/* =======Old Ward No.========= */}
