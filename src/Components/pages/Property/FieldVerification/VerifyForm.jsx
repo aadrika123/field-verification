@@ -53,7 +53,7 @@ const VerifyForm = (props) => {
     
     {loader && <CommonLoader />}
 
-        <div className='w-full'>
+        {!loader && <div className='w-full'>
             <h1 className=' text-center font-bold text-xl border-b-2 border-gray-700 mx-4'>Field Verification <br />
             Self Assessment </h1>
         <div className='p-4 flex flex-col gap-y-4'>
@@ -65,7 +65,7 @@ const VerifyForm = (props) => {
             <VerifyIndex applicationData={applicationData} />
         </div>
         
-        </div>
+        </div>}
 
     
     </>

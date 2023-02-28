@@ -77,6 +77,8 @@ export default function ProjectApiList() {
 
         api_safInboxList: `${baseUrl}/api/property/saf/inbox`,
 
+        api_harvestingInboxList : `${baseUrl}/api/property/harvesting/inbox`,
+
 
         // Bifurcation API List Start
 

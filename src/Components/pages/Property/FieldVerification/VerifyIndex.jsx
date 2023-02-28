@@ -169,6 +169,7 @@ console.log('merged data => ', allFormData?.floor?.concat(allFormData?.addFloor)
 
     <ForwardScreen openScreen={forwardStatus} id={props?.applicationData?.id} />
     
+        {!loader && 
         <div className='w-full'>
 
             {(pageNo != 6 && !loader) && <div className='text-xs mb-1'>Page No.: {pageNo}/5</div>}
@@ -183,7 +184,7 @@ console.log('merged data => ', allFormData?.floor?.concat(allFormData?.addFloor)
 
             {(pageNo == 5 && !loader) && <Preview next={() => submitFun()} back={() => backFun(5)} allData={allFormData} applicationData={props?.applicationData} wardList={wardList} propertyList={propertyType} roadList={roadList} usageList={usageType} occupancyList={occupancyType} constructionList={constructionList} floorList={floorList} /> }
 
-        </div>
+        </div>}
     
     </>
   )

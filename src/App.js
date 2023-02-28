@@ -7,11 +7,12 @@ import "react-toastify/dist/ReactToastify.css";
 import TopBar from "./Components/pages/TopBar";
 import NewDashboardRoutes from "./Components/pages/Dashboard/NewDashboardRoutes";
 import CommonLoader from "./Components/pages/Common/CommonLoader";
-import PropertyVerificationForm from "./Components/pages/Property/PropertyVerificationForm";
+// import PropertyVerificationForm from "./Components/pages/Property/PropertyVerificationForm";
 import SearchApplications from "./Components/pages/Common/SearchApplications";
 import VerifyForm from "./Components/pages/Property/FieldVerification/VerifyForm";
 import GeoIndex from "./Components/pages/Property/GeoTagging/GeoIndex";
 import CitizenPropSafApplicationFormIndex from "./Components/pages/Property/CitizenSafForm/CitizenPropSafApplicationFormIndex";
+import HarvestingVerificationIndex from "./Components/pages/Property/HarvestingVerification/HarvestingVerificationIndex";
 
 const App = () => {
   const [loader, setloader] = useState(false);
@@ -52,11 +53,12 @@ const App = () => {
             <TopBar />
             <NewDashboardRoutes />
             <Routes>
-              <Route path="/propertyVerification/:id" element={<PropertyVerificationForm />} />
               
               <Route path="/search/:type" element={<SearchApplications />} />
 
               <Route path="/propVerify/:id" element={<VerifyForm />} />
+
+              <Route path="/harvestingVerify/:id" element={<HarvestingVerificationIndex />} />
 
               <Route path="/geoTagging/:id" element={<GeoIndex /> } />
 

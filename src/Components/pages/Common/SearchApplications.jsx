@@ -5,11 +5,12 @@ import * as yup from 'yup'
 import { useFormik } from 'formik'
 import axios from 'axios'
 import CommonLoader from '../Common/CommonLoader'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import search from '../../assets/images/search.png'
 import {RiFilter2Line} from 'react-icons/ri'
 import { RotatingLines } from 'react-loader-spinner'
 import PropertyView from '../Property/PropertyView'
+import HarvestingView from '../Property/HarvestingView'
 
 const SearchApplications = () => {
     const [readymadeListData, setreadymadeListData] = useState();
@@ -20,11 +21,10 @@ const SearchApplications = () => {
   const [viewAll, setviewAll] = useState(false)
 
 
-  // SETTING GLOBAL TITLE AT ONCE USING CUSTOM HOOK
-//   useSetTitle('Search Applied Applications')
+  const {type} = useParams()
 
   const {
-    api_filterPropertyAppliedApplications, api_safInboxList
+    api_filterPropertyAppliedApplications, api_safInboxList, api_harvestingInboxList
   } = ProjectApiList();
 
   const header = ApiHeader()
@@ -88,11 +88,19 @@ const SearchApplications = () => {
 
   useEffect(() => {
     getAllList()
-  },[])
+  },[type])
+
 
     const getAllList = () => {
       setloader(true)
-    axios.get(api_safInboxList, ApiHeader())
+
+      let data;
+
+      type == 'harvesting' && (data = {url : api_harvestingInboxList, method : 'post'})
+      type == 'property' && (data = {url : api_safInboxList, method : 'get'})
+
+    if(data?.method == 'post'){
+      axios[data?.method](data?.url,{}, ApiHeader())
     .then((res) => {
       console.log('applied application. in ...', res?.data)
       setreadymadeListData(res.data?.data)
@@ -106,6 +114,25 @@ const SearchApplications = () => {
       setloader(false)
 
     });
+    }
+
+    if(data?.method == 'get'){
+      axios[data?.method](data?.url, ApiHeader())
+    .then((res) => {
+      console.log('applied application. in ...', res?.data)
+      setreadymadeListData(res.data?.data)
+      setreadymadeListStatus(true)
+      setloader(false)
+      setviewAll(false)
+    })
+    .catch((err) => {
+      console.log("Error while fetching Filter Data", err)
+      setreadymadeListStatus(false)
+      setloader(false)
+
+    });
+    }
+    
   }
 
 
@@ -159,11 +186,11 @@ const SearchApplications = () => {
                 <option value="">--Select--</option>
                 <option value="saf">SAF</option>
                 {/* <option value="concession">Concession</option>
-                <option value="objection">Objection</option>
+                <option value="objection">Objection</option> */}
                 <option value="rainWaterHarvesting">Rainwater Harvesting</option>
-                <option value="holdingDeactivation">Holding Deactivation</option>
+                {/* <option value="holdingDeactivation">Holding Deactivation</option> */}
                 <option value="amalgamation">Amalgamtion</option>
-                <option value="bifurcation">Bifurcation</option> */}
+                <option value="bifurcation">Bifurcation</option>
               </select>
               <p className="text-red-500 text-xs">
                 {formik.touched.filterBy && formik.errors.filterBy
@@ -247,7 +274,8 @@ const SearchApplications = () => {
  {(readymadeListStatus && readymadeListData?.length != 0) &&
            readymadeListData?.map((dataList) => 
             <>
-                    <PropertyView dataList={dataList} />
+                    {type == 'property' && <PropertyView dataList={dataList} />}
+                    {type == 'harvesting' && <HarvestingView dataList={dataList} />}
             </>)
           }
           {
