@@ -163,7 +163,7 @@ console.log('merged data => ', allFormData?.floor?.concat(allFormData?.addFloor)
 
     {loader && <CommonLoader />}
 
-    <ToastContainer position="top-right" autoClose={2000} />
+    <ToastContainer position="top-center" autoClose={2000} />
 
     <SubmissionScreen heading={'Field Verification'} type='saf' process='verify' appNo={props?.applicationData?.saf_no} openSubmit={submitStatus} id={props?.applicationData?.id} navigation={() => navigate('/search/property')} forward={() => setforwardStatus(true)}/>
 

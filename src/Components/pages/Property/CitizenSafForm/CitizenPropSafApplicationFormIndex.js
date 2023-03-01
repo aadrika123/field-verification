@@ -36,7 +36,7 @@ import SafFormReview2 from './SafFormReview/SafFormReview2'
 import PropertyApiList from '../../../api/PropertyApiList'
 import CitizenPropBasicDetail3 from './CitizenPropBasicDetail3'
 import CitizenPropAdditionalDetails from './CitizenPropAdditionalDetails'
-import ProjectApiList from '../../../api/ProjectApiList'
+// import ProjectApiList from '../../../api/ProjectApiList'
 import { HiArrowNarrowRight, HiArrowNarrowLeft } from 'react-icons/hi'
 import { Tooltip } from 'react-tooltip'
 
@@ -44,7 +44,7 @@ import { Tooltip } from 'react-tooltip'
 function CitizenPropSafApplicationFormIndex() {
 
     const { api_getMasterData, api_postNewAssessment, api_getAllUlb, api_getHoldingDetails, api_getLocationByUlb, api_reviewCalculation, api_updateSafDetails } = CitizenApplyApiList()
-    const { api_getStaticSafDetails } = ProjectApiList()
+    // const { api_getStaticSafDetails } = ProjectApiList()
     const { notify } = useContext(contextVar)     //////global toast function/////
     const navigate = useNavigate()
     const [formIndex, setFormIndex] = useState(1) ///{***✅ formindex specifies type of form like basicdetails at index 1 ...***}///
@@ -726,7 +726,7 @@ function CitizenPropSafApplicationFormIndex() {
 
     return (
         <>
-            <ToastContainer autoClose={2000} position="top-right" />
+            <ToastContainer autoClose={2000} position="top-center" />
             {loaderStatus && <CommonLoader />}
 
             <div className='text-center font-bold text-gray-700 text-xl border-b-2 border-gray-700 mx-4 mb-4'>

@@ -76,7 +76,8 @@ export default function PropertyApiList() {
     // 29
     get_HarvestingSpecial: `${baseUrl}/api/property/harvesting/special-inbox`,
     // 30
-    get_HarvestingDetailsById: `${baseUrl}/api/property/harvesting/details-by-id`,
+    get_HarvestingDetailsById: `${baseUrl}/api/property/harvesting/static-details`,
+    harvestingSiteVerification : `${baseUrl}/api/property/harvesting/geotagging`,
     // 31
     post_HarvestingEscalate: `${baseUrl}/api/property/harvesting/escalate`,
     // 31

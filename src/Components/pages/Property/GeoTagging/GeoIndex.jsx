@@ -361,7 +361,7 @@ const GeoIndex = () => {
 
     {loader && <CommonLoader /> }
 
-    <ToastContainer position="top-right" autoClose={2000} />
+    <ToastContainer position="top-center" autoClose={2000} />
 
     <SubmissionScreen heading={'Field Verification'} type='saf' process='geoTagging' appNo={applicationData?.saf_no} openSubmit={submitStatus} id={id} navigation={() => navigate('/search/property')} forward={() => setforwardStatus(true)}/>
     <ForwardScreen openScreen={forwardStatus} id={id} navigation={() => navigate('/search/property')} />

@@ -116,7 +116,7 @@ function SafFormDemand(props) {
       <div
         className={` block p-4 mt-4 w-full md:py-4 md:px-20 md:pt-0  md:w-full mx-auto  overflow-x-auto `}
       >
-        <ToastContainer position="top-right" autoClose={2000} />
+        <ToastContainer position="top-center" autoClose={2000} />
 
         {/* <h1 className='px-2 font-semibold mt-0 bg-green-400 text-center text-white font-serif py-2 text-lg shadow-lg border border-white'>Saf Demand</h1> */}
         <h1 className="px-2 font-semibold mt-0 bg-green-400 text-center text-white font-serif py-2 text-lg shadow-lg border border-white">
