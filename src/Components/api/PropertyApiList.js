@@ -5,9 +5,9 @@
 //    Revision - 1
 //    Project - JUIDCO
 /////////////////////////////////////////////////////////////////////////////////
-
+import BackendUrl from './BackendUrl'
 export default function PropertyApiList() {
-  let baseUrl = "http://192.168.0.16:8000"
+    let baseUrl = BackendUrl; 
   // let baseUrlT = "http://192.168.0.205:8000"
   let apiList = {
 

@@ -5,11 +5,11 @@
 // Component   : ClusterFormApi
 // Description : Cluster api list
 //////////////////////////////////////////////////////////////////////
-
+import BackendUrl from './BackendUrl'
 const ClusterFormApi = () => {
 
     const baseUrlT = 'http://203.129.217.245:80'
-    const baseUrl = 'http://192.168.0.16:8000'
+    let baseUrl = BackendUrl
 
     // const token = '1756|TboTCPMMkGagRka00NStFFK0xsFOqhXkd7lAAYfc'
 

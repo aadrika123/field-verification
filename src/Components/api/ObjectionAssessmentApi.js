@@ -5,10 +5,10 @@
 // Component   : ObjectionAssessmentApi
 // Description : Objection Assessment Error api list
 //////////////////////////////////////////////////////////////////////
-
+import BackendUrl from './BackendUrl'
 const ObjectionAssessmentApi = () => {
 
-    const baseUrl = 'http://192.168.0.16:8000'
+    let baseUrl = BackendUrl; 
   
     let apiLinks = {
         
