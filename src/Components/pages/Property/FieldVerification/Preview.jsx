@@ -5,7 +5,12 @@ import FloorPreview from './FloorPreview'
 
 const Preview = (props) => {
 
-  console.log('all data', props?.allData)
+  // console.log('all data', props?.allData)
+
+  
+//   role == '["Tax Collector"]'
+// role == '["ULB Tax Collector"]'
+const role = localStorage.getItem('roles')
 
   return (
     <>
@@ -30,7 +35,7 @@ const Preview = (props) => {
                 <div onClick={props?.back} className='px-4 py-1.5 text-sm text-white rounded-sm shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 cursor-pointer'>
                     Back
                 </div>
-            <button onClick={props?.next} className="px-4 py-1.5 mr-4 text-sm text-white rounded-sm shadow-md bg-green-500 hover:bg-green-600 focus:bg-green-600">Submit</button>
+            <button onClick={props?.next} className="px-4 py-1.5 mr-4 text-sm text-white rounded-sm shadow-md bg-green-500 hover:bg-green-600 focus:bg-green-600">{role == '["ULB Tax Collector"]' ? 'Forward' : 'Submit'}</button>
             </div>
 
     </>

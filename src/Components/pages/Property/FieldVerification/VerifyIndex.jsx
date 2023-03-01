@@ -39,6 +39,7 @@ const VerifyIndex = (props) => {
     const [allData, setallData] = useState()
     const [allFormData, setallFormData] = useState()
     const [updatedData, setupdatedData] = useState()
+    const [forward, setforward] = useState(false)
 
     const [pageNo, setpageNo] = useState(1)
 
@@ -95,6 +96,8 @@ console.log('merged data => ', allFormData?.floor?.concat(allFormData?.addFloor)
 
   const submitFun = () => {
 
+    role == '["ULB Tax Collector"]' && setforwardStatus(true)
+
     setloader(true)
 
     // val == 'false' && toast.error('Something went wrong !!!')
@@ -132,8 +135,10 @@ console.log('merged data => ', allFormData?.floor?.concat(allFormData?.addFloor)
     .then((res) => {
       if(res?.data?.status == true){
       console.log("success => ", res)
-      toast.success('Data Submitted Successfully !!!')
+      role != '["ULB Tax Collector"]' && toast.success('Data Submitted Successfully !!!')
       setloader(false)
+      role == '["ULB Tax Collector"]' && setforward(true)
+      role == '["ULB Tax Collector"]' && navigate('/search/property')
       // navigate('/geoTagging/' + props?.applicationData?.id)
       // props.page(5)
       setsubmitStatus(true)
@@ -142,21 +147,32 @@ console.log('merged data => ', allFormData?.floor?.concat(allFormData?.addFloor)
       console.log("error => ", res)
       toast.error('Something went wrong !!!')
       setloader(false)
+      role == '["ULB Tax Collector"]' && setforward(false)
+      role == '["ULB Tax Collector"]' && setforwardStatus(false)
     }
     })
     .catch((err) => {
       console.log('error', err)
       toast.error('Something went wrong !!!')
       setloader(false)
+      role == '["ULB Tax Collector"]' && setforward(false)
+      role == '["ULB Tax Collector"]' && setforwardStatus(false)
     })
 
   }
+
+//   role == '["Tax Collector"]'
+// role == '["ULB Tax Collector"]'
 
   console.log('pre data => ', allFormData)
 
   const location = useLocation()
 
   const role = localStorage.getItem('roles')
+
+  const submitAction = () => {
+    role == '["ULB Tax Collector"]' ? setforwardStatus(true) : submitFun()
+  }
 
   return (
     <>
@@ -165,9 +181,9 @@ console.log('merged data => ', allFormData?.floor?.concat(allFormData?.addFloor)
 
     <ToastContainer position="top-center" autoClose={2000} />
 
-    <SubmissionScreen heading={'Field Verification'} type='saf' process='verify' appNo={props?.applicationData?.saf_no} openSubmit={submitStatus} id={props?.applicationData?.id} navigation={() => navigate('/search/property')} forward={() => setforwardStatus(true)}/>
+    {role != '["ULB Tax Collector"]' && <SubmissionScreen heading={'Field Verification'} type='saf' process='verify' appNo={props?.applicationData?.saf_no} openSubmit={submitStatus} id={props?.applicationData?.id} navigation={() => navigate('/search/property')} forward={() => setforwardStatus(true)}/>}
 
-    <ForwardScreen openScreen={forwardStatus} id={props?.applicationData?.id} />
+    <ForwardScreen openScreen={forwardStatus} id={props?.applicationData?.id} closePopUp={() => setforwardStatus(false)} canSubmit={forward} navigation={() => submitFun()} />
     
         {!loader && 
         <div className='w-full'>
@@ -182,7 +198,7 @@ console.log('merged data => ', allFormData?.floor?.concat(allFormData?.addFloor)
 
             {pageNo == 4 && <Remarks next={() => nextFun(4)} back={() => backFun(4)} collectData={collectDataFun} preData={allFormData?.remarks}  />}
 
-            {(pageNo == 5 && !loader) && <Preview next={() => submitFun()} back={() => backFun(5)} allData={allFormData} applicationData={props?.applicationData} wardList={wardList} propertyList={propertyType} roadList={roadList} usageList={usageType} occupancyList={occupancyType} constructionList={constructionList} floorList={floorList} /> }
+            {(pageNo == 5 && !loader) && <Preview next={() => submitAction()} back={() => backFun(5)} allData={allFormData} applicationData={props?.applicationData} wardList={wardList} propertyList={propertyType} roadList={roadList} usageList={usageType} occupancyList={occupancyType} constructionList={constructionList} floorList={floorList} /> }
 
         </div>}
     

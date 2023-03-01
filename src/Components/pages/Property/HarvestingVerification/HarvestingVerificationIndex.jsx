@@ -26,6 +26,7 @@ const HarvestingVerificationIndex = () => {
     const [imageCheck, setimageCheck] = useState(true)
     const [forwardStatus, setforwardStatus] = useState(false)
     const [frontCamera, setfrontCamera] = useState(false)
+    const [forward, setforward] = useState(false)
 
     const {get_HarvestingDetailsById, harvestingSiteVerification} = PropertyApiList()
 
@@ -34,10 +35,7 @@ const HarvestingVerificationIndex = () => {
     const navigate = useNavigate()
 
     const validationSchema = yup.object({
-        harvestingImage : yup.mixed().when([], {
-            is: () => imageCheck == false,
-            then : () => yup.mixed().required('image required'),
-        })
+        harvestingImage : yup.mixed().required('image required'),
     })
 
     const formik = useFormik({
@@ -46,7 +44,7 @@ const HarvestingVerificationIndex = () => {
         },
         onSubmit : (values) => {
             console.log('submitting image => ', values)
-            submitFun()
+            setforwardStatus(true)
         },
         validationSchema
     })
@@ -60,26 +58,33 @@ const HarvestingVerificationIndex = () => {
         {!frontCamera ? fd.append('harvestingImage', imageUpload) 
         :
         fd.append("harvestingImage", dataURLtoFile(imageUrl, "HarvestingImage.jpg"))}
-        fd.append('longitude', harvestingImageData?.longitude)
-        fd.append('latitude', harvestingImageData?.latitude)
+        {
+            imageCheck ? fd.append('verificationStatus', 1) : fd.append('verificationStatus', 0)
+        }
+        // fd.append('longitude', harvestingImageData?.longitude)
+        // fd.append('latitude', harvestingImageData?.latitude)
 
         axios.post(harvestingSiteVerification, fd, ApiHeader2())
         .then((res) => {
             if(res?.data?.status == true){
                 console.log('successfully submitted...')
-                toast.success("Submitted Successfully !!!")
+                // toast.success("Submitted Successfully !!!")
                 setloader(false)
-                setforwardStatus(true)
+                setforward(true)
             }
             if(res?.data?.status == false){
                 console.log('error submitted...')
                 toast.error("Something went wrong, please try after sometime !!!")
+                setforward(false)
+                setforwardStatus(false)
                 setloader(false)
             }
         })
         .catch((error) => {
             console.log('errrorr rwh => ', error)
             toast.error("Something went wrong, please try after sometime !!!")
+            setforward(false)
+            setforwardStatus(false)
             setloader(false)
         })
     }
@@ -103,9 +108,9 @@ const HarvestingVerificationIndex = () => {
         if (e.target.name == "harvestingImage"){
             setfrontCamera(false)
             let file = e.target.files[0];
-            const geoLocation = await getGeoLocation(file); // for location from image
-            console.log("1 Image geo location:", geoLocation); // for location from image
-            setharvestingImageData(geoLocation)
+            // const geoLocation = await getGeoLocation(file); // for location from image
+            // console.log("1 Image geo location:", geoLocation); // for location from image
+            // setharvestingImageData(geoLocation)
             setimageUpload(e.target.files[0]);
             setimageUrl(URL.createObjectURL(e.target.files[0]))
             formik.setFieldTouched('flongitude', harvestingImageData?.longitude)
@@ -260,7 +265,7 @@ const HarvestingVerificationIndex = () => {
     
     {loader && <CommonLoader />}
 
-    <ForwardScreen openScreen={forwardStatus} id={id} navigation={() => navigate('/search/harvesting')} />
+    <ForwardScreen openScreen={forwardStatus} id={id} navigation={() => submitFun()} closePopUp={() => setforwardStatus(false)} canSubmit={forward} />
 
         <div className='w-full'>
             <h1 className=' text-center font-bold text-xl border-b-2 border-gray-700 mx-4'>Field Verification <br />
@@ -352,9 +357,7 @@ const HarvestingVerificationIndex = () => {
 
                         <div className="col-span-12 px-2">
                         <div className="grid grid-cols-12 text-sm pb-2">
-                            {
-                                !imageCheck && 
-                                <>
+                           
                                 <span className='col-span-12 grid grid-cols-12 mb-2'>
                                     <span className="col-span-4 text-sm flex items-center font-semibold">Upload :</span>
                                     <span className="col-span-5 text-sm"><input onChange={(e) => handleImage(e)} type="file" name="harvestingImage" id="" accept='.jpg, .jpeg' className=' bg-white px-2 py-1 w-full rounded-sm shadow-sm border-[1px] border-gray-400' /></span>
@@ -366,21 +369,20 @@ const HarvestingVerificationIndex = () => {
                                 </span>
                                 
                         
-                        <span className='col-span-12 grid grid-cols-12'>
+                        {/* <span className='col-span-12 grid grid-cols-12'>
                             <span className="col-span-6 text-sm flex items-center font-semibold">Latitude :</span>
                             <span className="col-span-6 text-sm"><span className='font-semibold text-sm'>{harvestingImageData?.latitude}</span></span>
                         </span>
                         <span className='col-span-12 grid grid-cols-12'>
                             <span className="col-span-6 text-sm flex items-center font-semibold">Longitude :</span>
                             <span className="col-span-6 text-sm"><span className='font-semibold text-sm'>{harvestingImageData?.longitude}</span></span>
-                        </span>
-                            </>
-                        }
+                        </span> */}
+                            
                     </div> 
                         </div>
 
                         <span className=' col-span-12 font-semibold text-center my-4 px-2'>
-                            <button type="submit" className="px-4 py-1.5 mr-4 text-sm text-white rounded-sm shadow-md bg-green-500 hover:bg-green-600 focus:bg-green-600">Submit</button>
+                            <button type="submit" className="px-4 py-1.5 mr-4 text-sm text-white rounded-sm shadow-md bg-green-500 hover:bg-green-600 focus:bg-green-600">Forward</button>
                         </span>
 
                     </form>

@@ -54,6 +54,8 @@ const GeoIndex = () => {
 
     const navigate = useNavigate()
 
+    const [forward, setforward] = useState(false)
+
     const [frontImageUpload, setfrontImageUpload] = useState()
     const [frontUrl, setfrontUrl] = useState(null)
     const [frontData, setfrontData] = useState()
@@ -96,7 +98,7 @@ const GeoIndex = () => {
         onSubmit : (values) => {
             // setloader(true)
             console.log('submitting images => ', values)
-            submitDocFun(values)
+            setforwardStatus(true)
         }
         , validationSchema
     })
@@ -134,15 +136,20 @@ const GeoIndex = () => {
                 console.log("success images", res)
                 // props?.next('true')
                 setloader(false)
-                toast.success('Document Uploaded Successfully !!!')
+                // toast.success('Document Uploaded Successfully !!!')
                 // navigate('/search/property')
                 setsubmitStatus(true)
+                setloader(false)
+                setforward(true)
             }
             if(res?.data?.status == false){
                 console.log("error images", res)
                 // props?.next('false')
                 setloader(false)
                 toast.error("Something Went Wrong !!!")
+                setforward(false)
+                setforwardStatus(false)
+                setloader(false)
             }
         })
         .catch((err) => {
@@ -150,6 +157,9 @@ const GeoIndex = () => {
             // props?.next('false')
             setloader(false)
             toast.error("Something Went Wrong !!!")
+            setforward(false)
+                setforwardStatus(false)
+                setloader(false)
         })
     }
 
@@ -363,8 +373,8 @@ const GeoIndex = () => {
 
     <ToastContainer position="top-center" autoClose={2000} />
 
-    <SubmissionScreen heading={'Field Verification'} type='saf' process='geoTagging' appNo={applicationData?.saf_no} openSubmit={submitStatus} id={id} navigation={() => navigate('/search/property')} forward={() => setforwardStatus(true)}/>
-    <ForwardScreen openScreen={forwardStatus} id={id} navigation={() => navigate('/search/property')} />
+    {/* <SubmissionScreen heading={'Field Verification'} type='saf' process='geoTagging' appNo={applicationData?.saf_no} openSubmit={submitStatus} id={id} navigation={() => navigate('/search/property')} forward={() => setforwardStatus(true)}/> */}
+    <ForwardScreen openScreen={forwardStatus} id={id} navigation={() => submitDocFun()} closePopUp={() => setforwardStatus(false)} canSubmit={forward} />
 
     <div className='w-full'>
             <h1 className=' text-center font-bold text-xl border-b-2 border-gray-700 mx-4'>Field Verification <br />
@@ -477,7 +487,7 @@ const GeoIndex = () => {
                 {/* <div onClick={props?.back} className='px-4 py-1.5 text-sm text-white rounded-sm shadow-md bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 cursor-pointer'>
                     Back
                 </div> */}
-            <button type='submit' className="px-4 py-1.5 mr-4 text-sm text-white rounded-sm shadow-md bg-green-500 hover:bg-green-600 focus:bg-green-600">Submit</button>
+            <button type='submit' className="px-4 py-1.5 mr-4 text-sm text-white rounded-sm shadow-md bg-green-500 hover:bg-green-600 focus:bg-green-600">Forward</button>
             </div>
 
             </form>}

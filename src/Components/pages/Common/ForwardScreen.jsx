@@ -27,6 +27,7 @@ const ForwardScreen = (props) => {
     useEffect(() => {
         console.log("enter in submission screen with application no.  =>  ", props?.id)
         props?.openScreen == true && openModal()
+        props?.openScreen == false && closeModal()
       }, [props?.openScreen])
 
     //   const closeAction = () => {
@@ -41,27 +42,38 @@ const ForwardScreen = (props) => {
             return
         }
 
-        setloader(true)
+        props?.navigation()
+
+        console.log('can submit => ', props?.canSubmit)
+
+        {props?.canSubmit == true && setloader(true)}
 
         let body = {
             applicationId : props?.id,
             action : 'forward',
             comment : comment 
         }
-
         console.log('data before forward => ', body)
+
+       {props?.canSubmit == true &&
+
         axios.post(api_postApplicationToLevel, body, ApiHeader())
         .then((res) => {
             setloader(false)
             closeModal()
             console.log('success forward => ', res)
             toast.success('Forwarded Successfully !!!')
-            navigate('/search/property')
+            navigate('/dashboard')
         })
         .catch((err) => {
             setloader(false)
             console.log('error forward => ', err)
-        })
+        })}
+      }
+
+      const closeAction = () => {
+        closeModal()
+        props.closePopUp()
       }
 
   return (
@@ -73,9 +85,9 @@ const ForwardScreen = (props) => {
       contentLabel="Example Modal"
     >
       <div style={{'zIndex':1000}} class="absolute z-40 rounded-lg shadow-lg shadow-indigo-300 md:w-[50vw] md:h-max w-[90%] border-2 border-indigo-500 bg-gray-50 px-2 m-2 py-4 h-max border-t-2 border-l-2 overflow-auto">
-      {/* <div className="absolute top-2 z-10 bg-red-200 hover:bg-red-300 right-2 rounded-full p-2 cursor-pointer" onClick={() => closeAction()}>
+      <div className="absolute top-2 z-10 bg-red-200 hover:bg-red-300 right-2 rounded-full p-2 cursor-pointer" onClick={() => closeAction()}>
                   <ImCross fontSize={10}/>
-              </div> */}
+              </div>
 
               <div className='flex flex-col items-center px-4'>
                     <div className="mt-6 mb-4 bg-indigo-600 font-semibold rounded-sm w-full 2xl:text-2xl text-lg text-center shadow-sm text-white px-4 py-2 poppins uppercase">
