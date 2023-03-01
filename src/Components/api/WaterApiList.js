@@ -1,7 +1,7 @@
 import ApiHeader from "./ApiHeader";
-
+import BackendUrl from './BackendUrl'
 export default function WaterApiList() {
-    let baseUrl = "http://192.168.0.16:8000"
+    let baseUrl = BackendUrl; 
     // let baseUrl = "http://192.168.0.148:81"
 
     const header = ApiHeader()

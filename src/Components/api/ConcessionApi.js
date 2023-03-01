@@ -5,20 +5,20 @@
 // Component   : ConcessionApi
 // Description : Concession api list
 //////////////////////////////////////////////////////////////////////
-
+import BackendUrl from './BackendUrl'
 const ConcessionApi = () => {
    
-  const baseUrl = 'http://192.168.0.16:8000/api/property/concession'
+    let baseUrl = BackendUrl
 
   let apiList = {
 
       // getting owner list
-      getConcessionOwners : `${baseUrl}/owner-details`,
+      getConcessionOwners : `${baseUrl}/api/property/concession/owner-details`,
 
-      getDocMaster : `${baseUrl}/get-doc-type`,
+      getDocMaster : `${baseUrl}/api/property/concession/get-doc-type`,
       
       // uploading concession form
-      postConcessionForm : `${baseUrl}/apply-concession`,
+      postConcessionForm : `${baseUrl}/api/property/concession/apply-concession`,
 
   }
 

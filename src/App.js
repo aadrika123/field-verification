@@ -43,7 +43,7 @@ const App = () => {
     <>
       {loader && <CommonLoader />}
 
-      <ToastContainer position="top-right" autoClose={2000} />
+      <ToastContainer position="top-center" autoClose={2000} />
 
       <contextVar.Provider value={contextData}>
         <Routes>

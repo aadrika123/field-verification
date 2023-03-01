@@ -5,9 +5,9 @@
 //    Revision - 1
 //    Project - JUIDCO
 /////////////////////////////////////////////////////////////////////////////////
-
+import BackendUrl from './BackendUrl'
 export default function PropertyApiList() {
-  let baseUrl = "http://192.168.0.16:8000"
+    let baseUrl = BackendUrl; 
   // let baseUrlT = "http://192.168.0.205:8000"
   let apiList = {
 
@@ -76,7 +76,8 @@ export default function PropertyApiList() {
     // 29
     get_HarvestingSpecial: `${baseUrl}/api/property/harvesting/special-inbox`,
     // 30
-    get_HarvestingDetailsById: `${baseUrl}/api/property/harvesting/details-by-id`,
+    get_HarvestingDetailsById: `${baseUrl}/api/property/harvesting/static-details`,
+    harvestingSiteVerification : `${baseUrl}/api/property/harvesting/geotagging`,
     // 31
     post_HarvestingEscalate: `${baseUrl}/api/property/harvesting/escalate`,
     // 31

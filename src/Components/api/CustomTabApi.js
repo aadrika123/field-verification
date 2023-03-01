@@ -5,14 +5,14 @@
 // Component   : ClusterFormApi
 // Description : Cluster api list
 //////////////////////////////////////////////////////////////////////
-
+import BackendUrl from './BackendUrl'
 const CustomTabApi = () => {
-  const baseUrl = "http://192.168.0.16:8000/api/property"; 
+    let baseUrl = BackendUrl; 
 
   let apiList = {
-    getRemark: `${baseUrl}/get-all-custom-tab-data`,
+    getRemark: `${baseUrl}/api/property/get-all-custom-tab-data`,
 
-    postRemark: `${baseUrl}/post-custom-data`,
+    postRemark: `${baseUrl}/api/property/post-custom-data`,
   };
 
   return apiList;

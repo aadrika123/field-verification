@@ -5,9 +5,9 @@
 // Component   : ObjectionRectificationApi
 // Description : Objection Rectification api list
 //////////////////////////////////////////////////////////////////////
-
+import BackendUrl from './BackendUrl'
 const ObjectionRectificationApi = () => {
-  const baseUrl = "http://192.168.0.16:8000";
+    let baseUrl = BackendUrl; 
 
   let apiLinks = {
     
