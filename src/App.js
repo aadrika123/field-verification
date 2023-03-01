@@ -13,6 +13,8 @@ import VerifyForm from "./Components/pages/Property/FieldVerification/VerifyForm
 import GeoIndex from "./Components/pages/Property/GeoTagging/GeoIndex";
 import CitizenPropSafApplicationFormIndex from "./Components/pages/Property/CitizenSafForm/CitizenPropSafApplicationFormIndex";
 import HarvestingVerificationIndex from "./Components/pages/Property/HarvestingVerification/HarvestingVerificationIndex";
+import WaterApplyIndex from "./Components/pages/Water/ApplyNewConnection/WaterApplyIndex";
+import WaterConsumerSearch from "./Components/pages/Water/WaterSearch/WaterConsumerSearch";
 
 const App = () => {
   const [loader, setloader] = useState(false);
@@ -53,16 +55,21 @@ const App = () => {
             <TopBar />
             <NewDashboardRoutes />
             <Routes>
-              
+
               <Route path="/search/:type" element={<SearchApplications />} />
 
               <Route path="/propVerify/:id" element={<VerifyForm />} />
 
               <Route path="/harvestingVerify/:id" element={<HarvestingVerificationIndex />} />
 
-              <Route path="/geoTagging/:id" element={<GeoIndex /> } />
+              <Route path="/geoTagging/:id" element={<GeoIndex />} />
 
-              <Route path="/safform/:safType/:safId" element={<CitizenPropSafApplicationFormIndex /> } />
+              <Route path="/safform/:safType/:safId" element={<CitizenPropSafApplicationFormIndex />} />
+
+              {/* Water Routes */}
+
+              <Route path="/water-apply/" element={<WaterApplyIndex />} />
+              <Route path="/water-consumer-search/" element={<WaterConsumerSearch />} />
 
             </Routes>
           </>

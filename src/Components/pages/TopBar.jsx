@@ -235,7 +235,7 @@ const TopBar = () => {
                         <li class="relative cursor-pointer">
                           <span className={`${dropMenuBtn}`}onClick={() => {
                             setnavToggle(false)
-                            navigate('/search/water')
+                            navigate('/water-consumer-search')
                           }}>Search Consumer</span>
                         </li>
                         <li class="relative cursor-pointer">
