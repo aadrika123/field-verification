@@ -59,11 +59,19 @@ const ForwardScreen = (props) => {
 
         axios.post(api_postApplicationToLevel, body, ApiHeader())
         .then((res) => {
-            setloader(false)
+            if(res?.data?.status == true){
+              setloader(false)
             closeModal()
             console.log('success forward => ', res)
             toast.success('Forwarded Successfully !!!')
             navigate('/dashboard')
+            }
+            if(res?.data?.status == false){
+              setloader(false)
+              props.closePopUp()
+            console.log('error forward => ', res)
+            toast.error('Something went wrong, please try again after sometime !!!')
+            }
         })
         .catch((err) => {
             setloader(false)
