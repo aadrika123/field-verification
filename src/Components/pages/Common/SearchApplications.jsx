@@ -201,7 +201,7 @@ const SearchApplications = () => {
             <div>
               <label className="form-label inline-block mb-1 text-gray-600 text-sm font-semibold">
                 
-                SAF No. {searchBy}
+                Application No. {searchBy}
                 <span className="text-red-500">*</span>
               </label>
               <input
