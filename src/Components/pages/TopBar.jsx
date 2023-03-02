@@ -119,7 +119,7 @@ const TopBar = () => {
 
             {/* ======Mobile Menu========== */}
             {navToggle && <div class="lg:hidden fixed w-full h-full inset-0 z-0" id="mobile-menu">
-            <span class="fixed bg-gray-900 bg-opacity-70 w-full h-full inset-x-0 top-0"></span>
+            <span class="fixed bg-gray-900 bg-opacity-70 w-full h-full inset-x-0 top-0" onClick={() => setnavToggle(!navToggle)}></span>
 
             <nav id="mobile-nav" class="flex flex-col ltr:right-0 rtl:left-0 w-64 fixed top-0 py-4 bg-white text-gray-700 h-full overflow-auto z-40">
 
